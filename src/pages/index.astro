@@ -1,0 +1,92 @@
+---
+/**
+ * PHASE 1 PLACEHOLDER PAGE.
+ *
+ * Its job is to prove the toolchain: Tailwind v4 tokens resolve, the self-hosted
+ * variable font loads, and the `work` content collection type-checks and reads.
+ * Phase 2 replaces this with the real homepage on top of a shared base layout.
+ */
+import { getCollection } from 'astro:content';
+import '../styles/global.css';
+
+const work = await getCollection('work');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bhavana Joshi — Design to Delivery</title>
+    <meta
+      name="description"
+      content="Portfolio of Bhavana Joshi, product designer. Creativity with purpose."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+    >
+      Skip to content
+    </a>
+
+    <main id="main" class="container-content py-24 md:py-32">
+      <p class="text-meta uppercase text-ink-muted">Phase 1 · Scaffold</p>
+
+      <h1 class="mt-8 text-display md:text-display-lg">Creativity with purpose.</h1>
+
+      <p class="mt-10 max-w-2xl text-lead text-ink-muted">
+        This is a scaffold check, not the homepage. It exists to confirm the type scale,
+        the monochrome palette, the self-hosted variable font, and the content collection
+        all build cleanly before any real layout work starts.
+      </p>
+
+      <!-- Section break: pure black block. The only permitted "accent". -->
+      <div class="my-16 h-px w-full bg-rule" aria-hidden="true"></div>
+
+      <h2 class="text-h2">Type scale</h2>
+      <div class="mt-8 space-y-6 border-t border-rule pt-8">
+        <p class="text-h1">Heading one — 44px</p>
+        <p class="text-h2">Heading two — 32px</p>
+        <p class="text-h3">Heading three — 22px</p>
+        <p class="text-lead">Lead paragraph — 22px, used for positioning copy.</p>
+        <p class="text-body max-w-2xl">
+          Body copy — 17px. The work is the colour: chrome stays monochrome so that
+          case-study imagery supplies every bit of visual interest.
+        </p>
+        <p class="text-meta uppercase text-ink-muted">Meta — 13px, tracked</p>
+      </div>
+
+      <div class="my-16 h-24 w-full bg-black" aria-hidden="true"></div>
+
+      <h2 class="text-h2">Content collection</h2>
+      <p class="mt-4 text-body text-ink-muted">
+        <strong class="text-ink">{work.length}</strong>
+        {work.length === 1 ? 'entry' : 'entries'} found in the
+        <code>work</code> collection.
+      </p>
+      <ul class="mt-6 space-y-3 border-t border-rule pt-6">
+        {
+          work.map((entry) => (
+            <li class="text-body">
+              <span class="font-semibold">{entry.data.title}</span>
+              <span class="text-ink-muted">
+                {' '}
+                — {entry.data.client}, {entry.data.year}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="mt-16 border border-rule p-6 text-body text-ink-muted">
+        <strong class="text-ink">Content status:</strong> no <code>bhavanajoshi-rescue/</code>
+        folder was found, so the real copy and images have not been imported. See
+        <code>TODO-CONTENT.md</code> at the repo root for exactly what needs supplying.
+      </p>
+    </main>
+  </body>
+</html>
