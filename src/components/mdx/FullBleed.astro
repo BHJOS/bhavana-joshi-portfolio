@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/** Edge-to-edge image. The one permitted escape from the content column. */
+interface Props {
+  src: ImageMetadata;
+  alt?: string;
+  altTodo?: boolean;
+  caption?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const { src, alt, altTodo = false, caption, loading = 'lazy' } = Astro.props;
+
+if (!altTodo && alt === undefined) {
+  throw new Error('FullBleed: `alt` is required (or `altTodo`). Never invent alt text.');
+}
+---
+
+<figure class="full-bleed my-16">
+  {altTodo && <Fragment set:html="<!-- TODO(alt): needs alt text from Bhavana -->" />}
+  <Image
+    src={src}
+    alt={altTodo ? '' : alt!}
+    width={2400}
+    loading={loading}
+    decoding="async"
+    sizes="100vw"
+    class="w-full"
+  />
+  {
+    caption && (
+      <figcaption class="container-content mt-3 text-meta text-ink-muted normal-case tracking-normal">
+        {caption}
+      </figcaption>
+    )
+  }
+</figure>

@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EMAIL, LINKEDIN } from '../consts';
+import portrait from '../assets/about/me.png';
+---
+
+<BaseLayout
+  title="About"
+  description="Bhavana Joshi is a product designer. Over the last 20 years she has lived in four countries and worked on some of the world's most well-known brands."
+>
+  <section class="container-content pt-20 pb-24 md:pt-32">
+    <div class="grid grid-cols-1 gap-x-16 gap-y-12 md:grid-cols-5">
+      <div class="md:col-span-3">
+        <h1 class="text-h1 md:text-display text-balance">
+          I love to help define brands and elevate user experience.
+        </h1>
+
+        <div class="mt-10 max-w-2xl space-y-6 text-lead text-ink-muted">
+          <p>
+            Over the last 20 years, I have travelled, lived in 4 different countries and
+            worked on some of the world's most well-known brands in different markets around
+            the world. My approach to design is influenced by creative ideas that are
+            strategic and aspire to meet the brand purpose.
+          </p>
+          <p>
+            With an efficient, minimalistic and more accessible approach to design, I am
+            inspired by projects that bring humanity together and celebrate our diversity.
+          </p>
+        </div>
+      </div>
+
+      <div class="md:col-span-2">
+        {/*
+          TODO(alt): alt text for this portrait was not in the rescue manifest.
+          Rendering alt="" until Bhavana writes it — a wrong description is worse
+          than none. Reported by `npm run audit:alt`.
+        */}
+        <Image
+          src={portrait}
+          alt=""
+          width={600}
+          densities={[1, 2]}
+          loading="eager"
+          decoding="async"
+          sizes="(min-width: 768px) 400px, 100vw"
+          class="w-full border border-rule"
+        />
+      </div>
+    </div>
+  </section>
+
+  <div class="h-32 w-full bg-black md:h-48" aria-hidden="true"></div>
+
+  <section class="container-content py-24 md:py-32">
+    <h2 class="text-h1">To start a conversation, please email me.</h2>
+
+    <dl class="mt-12 grid grid-cols-1 gap-x-10 gap-y-8 border-t border-rule pt-8 sm:grid-cols-2">
+      <div>
+        <dt class="text-meta uppercase text-ink-muted">Email</dt>
+        <dd class="mt-2 text-lead">
+          <a href={`mailto:${EMAIL}`} class="underline underline-offset-8 hover:opacity-60">
+            {EMAIL}
+          </a>
+        </dd>
+      </div>
+      <div>
+        <dt class="text-meta uppercase text-ink-muted">LinkedIn</dt>
+        <dd class="mt-2 text-lead">
+          <a
+            href={LINKEDIN}
+            rel="me noopener"
+            class="underline underline-offset-8 hover:opacity-60"
+          >
+            bhavana-joshi-us
+          </a>
+        </dd>
+      </div>
+    </dl>
+  </section>
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+import { NAV_LINKS } from '../consts';
+
+// Two links only, so there is no hamburger and therefore no client JS.
+// They sit inline at every breakpoint. See CLAUDE.md — zero client-side JS.
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path.startsWith(href + '/');
+---
+
+<header class="border-b border-rule">
+  <nav class="container-content flex items-baseline justify-between py-6" aria-label="Main">
+    <a
+      href="/"
+      class="text-h3 font-semibold tracking-tight text-ink no-underline hover:opacity-60"
+    >
+      Bhavana Joshi
+    </a>
+
+    <ul class="flex list-none items-baseline gap-8 p-0">
+      {
+        NAV_LINKS.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              aria-current={isActive(href) ? 'page' : undefined}
+              class:list={[
+                'text-meta uppercase no-underline hover:text-ink',
+                isActive(href)
+                  ? 'text-ink underline underline-offset-8 decoration-1'
+                  : 'text-ink-muted',
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>

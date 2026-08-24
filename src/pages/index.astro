@@ -1,92 +1,113 @@
 ---
-/**
- * PHASE 1 PLACEHOLDER PAGE.
- *
- * Its job is to prove the toolchain: Tailwind v4 tokens resolve, the self-hosted
- * variable font loads, and the `work` content collection type-checks and reads.
- * Phase 2 replaces this with the real homepage on top of a shared base layout.
- */
 import { getCollection } from 'astro:content';
-import '../styles/global.css';
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { SITE_TAGLINE, EMAIL, LINKEDIN, CLIENTS } from '../consts';
 
-const work = await getCollection('work');
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+
+// Client logos are plain PNGs from the old site, so they are globbed rather than
+// imported one by one. eager: they are all above or near the fold.
+const logoFiles = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/logos/*.png',
+  { eager: true }
+);
+const logos = CLIENTS.map((c) => ({
+  name: c.name,
+  img: logoFiles[`../assets/logos/${c.file}`]?.default,
+})).filter((l) => l.img);
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Bhavana Joshi',
+  jobTitle: 'Product Designer',
+  email: `mailto:${EMAIL}`,
+  url: Astro.site?.href,
+  sameAs: [LINKEDIN],
+  description:
+    'Product designer with cross-functional experience in digital design, advertising, and marketing communication.',
+};
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bhavana Joshi — Design to Delivery</title>
-    <meta
-      name="description"
-      content="Portfolio of Bhavana Joshi, product designer. Creativity with purpose."
-    />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </head>
+<BaseLayout>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline />
+  </Fragment>
 
-  <body>
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
-    >
-      Skip to content
-    </a>
-
-    <main id="main" class="container-content py-24 md:py-32">
-      <p class="text-meta uppercase text-ink-muted">Phase 1 · Scaffold</p>
-
-      <h1 class="mt-8 text-display md:text-display-lg">Creativity with purpose.</h1>
-
-      <p class="mt-10 max-w-2xl text-lead text-ink-muted">
-        This is a scaffold check, not the homepage. It exists to confirm the type scale,
-        the monochrome palette, the self-hosted variable font, and the content collection
-        all build cleanly before any real layout work starts.
+  {/* Hero */}
+  <section class="container-content pt-20 pb-24 md:pt-32 md:pb-32">
+    <h1 class="text-display md:text-display-lg text-balance">{SITE_TAGLINE}</h1>
+    <div class="mt-10 max-w-2xl space-y-6 text-lead text-ink-muted">
+      <p>
+        Innovation is not always about creating new but adding value, identifying
+        challenges and problems, and offering creative solutions.
       </p>
-
-      <!-- Section break: pure black block. The only permitted "accent". -->
-      <div class="my-16 h-px w-full bg-rule" aria-hidden="true"></div>
-
-      <h2 class="text-h2">Type scale</h2>
-      <div class="mt-8 space-y-6 border-t border-rule pt-8">
-        <p class="text-h1">Heading one — 44px</p>
-        <p class="text-h2">Heading two — 32px</p>
-        <p class="text-h3">Heading three — 22px</p>
-        <p class="text-lead">Lead paragraph — 22px, used for positioning copy.</p>
-        <p class="text-body max-w-2xl">
-          Body copy — 17px. The work is the colour: chrome stays monochrome so that
-          case-study imagery supplies every bit of visual interest.
-        </p>
-        <p class="text-meta uppercase text-ink-muted">Meta — 13px, tracked</p>
-      </div>
-
-      <div class="my-16 h-24 w-full bg-black" aria-hidden="true"></div>
-
-      <h2 class="text-h2">Content collection</h2>
-      <p class="mt-4 text-body text-ink-muted">
-        <strong class="text-ink">{work.length}</strong>
-        {work.length === 1 ? 'entry' : 'entries'} found in the
-        <code>work</code> collection.
+      <p>
+        As a product designer, I bring a wealth of cross-functional experience in digital
+        design, advertising, and marketing communication. I believe in finding solutions
+        that are inclusive, provide real value, and enhance user experience.
       </p>
-      <ul class="mt-6 space-y-3 border-t border-rule pt-6">
+    </div>
+  </section>
+
+  {/* Client logo row */}
+  <section class="border-t border-b border-rule py-12" aria-labelledby="clients-heading">
+    <div class="container-content">
+      <h2 id="clients-heading" class="text-meta uppercase text-ink-muted">
+        Selected clients
+      </h2>
+      {/*
+        The logos are trimmed to their ink bounds (scripts/prepare-logos.mjs), so their
+        aspect ratios vary from 5.4:1 (Computershare) to 1:1 (Motorola). Capping BOTH
+        height and width keeps them optically balanced — wide wordmarks hit the width
+        cap, square marks hit the height cap — instead of one dwarfing the rest.
+      */}
+      <ul class="mt-8 grid list-none grid-cols-2 items-center gap-x-10 gap-y-12 p-0 sm:grid-cols-3 lg:grid-cols-6">
         {
-          work.map((entry) => (
-            <li class="text-body">
-              <span class="font-semibold">{entry.data.title}</span>
-              <span class="text-ink-muted">
-                {' '}
-                — {entry.data.client}, {entry.data.year}
-              </span>
+          logos.map(({ name, img }) => (
+            <li class="flex items-center justify-center">
+              <Image
+                src={img!}
+                alt={name}
+                width={320}
+                densities={[1, 2]}
+                loading="lazy"
+                decoding="async"
+                sizes="160px"
+                class="max-h-12 w-auto max-w-[150px] object-contain opacity-75 grayscale"
+              />
             </li>
           ))
         }
       </ul>
+    </div>
+  </section>
 
-      <p class="mt-16 border border-rule p-6 text-body text-ink-muted">
-        <strong class="text-ink">Content status:</strong> no <code>bhavanajoshi-rescue/</code>
-        folder was found, so the real copy and images have not been imported. See
-        <code>TODO-CONTENT.md</code> at the repo root for exactly what needs supplying.
-      </p>
-    </main>
-  </body>
-</html>
+  {/* Featured work */}
+  <section class="container-content py-24 md:py-32" aria-labelledby="work-heading">
+    <div class="flex items-baseline justify-between">
+      <h2 id="work-heading" class="text-h1">Selected work</h2>
+      <a href="/work" class="text-meta uppercase text-ink underline underline-offset-8 hover:opacity-60">
+        All work
+      </a>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 gap-x-10 gap-y-16 md:grid-cols-2">
+      {work.map((entry, i) => <WorkCard entry={entry} loading={i < 2 ? 'eager' : 'lazy'} />)}
+    </div>
+  </section>
+
+  {/* Section break — the pure black block */}
+  <div class="h-32 w-full bg-black md:h-48" aria-hidden="true"></div>
+
+  <section class="container-content py-24 md:py-32">
+    <h2 class="text-h1 text-balance">Let's start a conversation.</h2>
+    <p class="mt-8 text-lead">
+      <a href={`mailto:${EMAIL}`} class="underline underline-offset-8 hover:opacity-60">
+        {EMAIL}
+      </a>
+    </p>
+  </section>
+</BaseLayout>

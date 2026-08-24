@@ -81,6 +81,12 @@ throat-clearing. Write it the way a confident designer talks about their own wor
 - **Every image has meaningful alt text.** If alt text has not been supplied for an image,
   **flag the file to Bhavana** — do not invent alt text. Decorative images get `alt=""`
   and only when genuinely decorative.
+
+  The mechanism: every MDX image component takes either `alt` or `altTodo`, and **throws
+  at build time if given neither**. `altTodo` renders `alt=""` (silent) rather than a
+  placeholder string, and is reported by `npm run audit:alt`. Work front matter uses
+  `heroAlt` / `heroAltTodo` the same way, enforced by a zod `.refine`.
+  Never clear an `altTodo` by writing the description yourself.
 - WCAG **AA** contrast minimum on all text (the monochrome palette makes this easy —
   `#111` on `#fff` is 18.9:1; do not drop below `#595959` on white for body text).
 - **Visible focus states** on every interactive element. Never `outline: none` without a
@@ -194,6 +200,27 @@ Clients on the logo row: **Xerox, IBM, BMS, Motorola, Computershare, Suzuki.**
 - LinkedIn: `https://www.linkedin.com/in/bhavana-joshi-us`
 
 ---
+
+## Commands
+
+| Command | Does |
+| --- | --- |
+| `npm run dev` | Dev server on :4321 |
+| `npm run verify` | check → build → alt audit → link/heading audit. Run before every commit. |
+| `npm run audit:alt` | Lists every image awaiting alt text; fails if any `<img>` lacks the attribute entirely |
+| `npm run audit:links` | Fails on broken internal links, heading-level skips, or ≠1 `<h1>` |
+| `node scripts/prepare-logos.mjs` | Re-trims client logos from the rescue archive |
+| `node scripts/optimize-sources.mjs` | Optional: PNG sources → WebP q90. Dry run unless `--apply` |
+
+## Content source
+
+`bhavanajoshi-rescue/` is the Squarespace export — copy, original-resolution images, and
+`manifest.json`. It is **gitignored and read-only**: the archive of originals. Images the
+site actually uses were copied into `src/assets/`. Never edit the rescue folder, and never
+commit it.
+
+Local image filenames there are `<first-8-chars-of-the-URL-guid>_<basename>`. Some kept
+percent-encoding (`colors%402x.png`), and a few carry a scraped `&quot;,` suffix.
 
 ## Working agreement
 

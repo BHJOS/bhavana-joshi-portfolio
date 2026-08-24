@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/** Two images side by side, stacking on mobile. */
+interface ItemProps {
+  src: ImageMetadata;
+  alt?: string;
+  altTodo?: boolean;
+  caption?: string;
+}
+
+interface Props {
+  items: ItemProps[];
+}
+
+const { items } = Astro.props;
+
+for (const [i, it] of items.entries()) {
+  if (!it.altTodo && it.alt === undefined) {
+    throw new Error(`TwoUp: item ${i} needs \`alt\` or \`altTodo\`. Never invent alt text.`);
+  }
+}
+---
+
+<div class="my-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+  {
+    items.map((it) => (
+      <figure>
+        {it.altTodo && <Fragment set:html="<!-- TODO(alt): needs alt text from Bhavana -->" />}
+        <Image
+          src={it.src}
+          alt={it.altTodo ? '' : it.alt!}
+          width={900}
+          densities={[1, 2]}
+          loading="lazy"
+          decoding="async"
+          sizes="(min-width: 640px) 540px, 100vw"
+          class="w-full border border-rule"
+        />
+        {it.caption && (
+          <figcaption class="mt-3 text-meta text-ink-muted normal-case tracking-normal">
+            {it.caption}
+          </figcaption>
+        )}
+      </figure>
+    ))
+  }
+</div>

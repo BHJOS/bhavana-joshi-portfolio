@@ -1,0 +1,35 @@
+---
+/**
+ * Results row. Each stat is a figure plus a short label.
+ *
+ * Rendered as a description list so the number/label pairing survives without
+ * the visual layout — a screen reader gets "20 percent reduction: time and budget",
+ * not two orphaned strings.
+ */
+interface Stat {
+  /** The headline figure, e.g. "~20%" or "10+". */
+  value: string;
+  /** What it measures, e.g. "reduction in time and budget". */
+  label: string;
+}
+
+interface Props {
+  items: Stat[];
+}
+
+const { items } = Astro.props;
+
+const colClass =
+  items.length === 2 ? 'sm:grid-cols-2' : items.length === 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3';
+---
+
+<dl class={`my-16 grid grid-cols-1 gap-x-8 gap-y-10 border-t border-ink pt-10 ${colClass}`}>
+  {
+    items.map((s) => (
+      <div>
+        <dt class="text-display leading-none tracking-tight">{s.value}</dt>
+        <dd class="mt-3 text-body text-ink-muted text-pretty">{s.label}</dd>
+      </div>
+    ))
+  }
+</dl>

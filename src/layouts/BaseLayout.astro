@@ -1,0 +1,78 @@
+---
+import { SITE_NAME, SITE_DESCRIPTION } from '../consts';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+// Preloaded so the headline never renders in a fallback face first.
+import outfitWoff2 from '@fontsource-variable/outfit/files/outfit-latin-wght-normal.woff2?url';
+
+interface Props {
+  /** Page title, without the site-name suffix. Omit on the homepage. */
+  title?: string;
+  description?: string;
+  /** Absolute or site-relative URL for og:image. Falls back to the site image. */
+  ogImage?: string;
+  /** Gated pages must not be indexed — they sit behind Cloudflare Access. */
+  noindex?: boolean;
+}
+
+const { title, description = SITE_DESCRIPTION, ogImage, noindex = false } = Astro.props;
+
+const pageTitle = title ? `${title} — Bhavana Joshi` : SITE_NAME;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const socialImage = new URL(ogImage ?? '/og-default.png', Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <link
+      rel="preload"
+      href={outfitWoff2}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
+    <slot name="head" />
+  </head>
+
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#main"
+      class="sr-only rounded-none focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-ink focus:px-5 focus:py-3 focus:text-meta focus:tracking-widest focus:text-paper focus:uppercase"
+    >
+      Skip to content
+    </a>
+
+    <Nav />
+
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

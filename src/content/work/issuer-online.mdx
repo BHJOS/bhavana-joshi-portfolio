@@ -1,0 +1,219 @@
+---
+title: 'Issuer Services Portal'
+client: 'Computershare'
+year: 2024
+role: 'Lead Designer'
+summary: 'Modernising a decade-old portal for public and private stock issuers. I built a comprehensive component library, revamped the navigation, and moved the team from UXPin to Figma.'
+tags: ['product design', 'design systems', 'fintech']
+hero: '../../assets/work/issuer-online/dashboard-tmb.png'
+# Alt text not supplied by the rescue manifest. Flagged rather than invented.
+heroAltTodo: true
+gated: true
+order: 1
+---
+
+import FullBleed from '../../components/mdx/FullBleed.astro';
+import Figure from '../../components/mdx/Figure.astro';
+import TwoUp from '../../components/mdx/TwoUp.astro';
+import BeforeAfter from '../../components/mdx/BeforeAfter.astro';
+import Gallery from '../../components/mdx/Gallery.astro';
+import PullQuote from '../../components/mdx/PullQuote.astro';
+import Stats from '../../components/mdx/Stats.astro';
+
+import banner from '../../assets/work/issuer-online/banner-issuer.png';
+import beforeAfter from '../../assets/work/issuer-online/before-and-after.png';
+import opt2Light from '../../assets/work/issuer-online/dashboard-new-light-2a.png';
+import opt2Dark from '../../assets/work/issuer-online/dashboard-new-dark-1a.png';
+import opt3Light from '../../assets/work/issuer-online/frame-427319496.png';
+import opt3Dark from '../../assets/work/issuer-online/dark-withrightrail.png';
+import shortlistLight from '../../assets/work/issuer-online/light-desktop-home-option-2-mock.png';
+import shortlistDark from '../../assets/work/issuer-online/dark-desktop-home-option-2-mock.png';
+import comparison from '../../assets/work/issuer-online/dashboard-comparison-updated.png';
+import persona from '../../assets/work/issuer-online/vecteezy-portrait-of-a-beautiful-young-woman-with-short-hair.jpg';
+import research from '../../assets/work/issuer-online/research-navigation-2.png';
+import wordcloud from '../../assets/work/issuer-online/wordcloud.png';
+import navBefore from '../../assets/work/issuer-online/dashboard-drawer-mike.jpg';
+import navAfter from '../../assets/work/issuer-online/nav-rail-transitions.png';
+import wireframe3 from '../../assets/work/issuer-online/desktop-home-option-2-wireframe3.png';
+import wireframe2 from '../../assets/work/issuer-online/desktop-home-option-2-wireframe2.png';
+import draft1 from '../../assets/work/issuer-online/desktop-home-option-2-draft-1.png';
+import draftDrawer from '../../assets/work/issuer-online/desktop-home-option-2-draft-1-rt-drawer.png';
+import table1 from '../../assets/work/issuer-online/table.png';
+import table2 from '../../assets/work/issuer-online/table-2.png';
+import datePickerLight from '../../assets/work/issuer-online/date-picker-light.png';
+import datePickerDark from '../../assets/work/issuer-online/date-picker-dark.png';
+
+<FullBleed src={banner} altTodo loading="eager" />
+
+As a Senior UX Designer at Computershare, a global market leader in transfer agency and
+share registration, I led the ongoing effort to enhance the design and user experience for
+the Issuer Services Portal. This portal manages shareholder registries and provides
+insights and management for various stock issuers.
+
+<PullQuote>
+  Issuer Services is the largest business unit of Computershare, generating over 40% of its
+  income.
+</PullQuote>
+
+<Figure src={beforeAfter} altTodo caption="Before and after" />
+
+<Gallery
+  columns={2}
+  items={[
+    { src: opt2Light, altTodo: true, caption: 'Dashboard Option 2 — Light' },
+    { src: opt2Dark, altTodo: true, caption: 'Dashboard Option 2 — Dark' },
+    { src: opt3Light, altTodo: true, caption: 'Dashboard Option 3 — Light' },
+    { src: opt3Dark, altTodo: true, caption: 'Dashboard Option 3 — Dark' },
+    { src: shortlistLight, altTodo: true, caption: 'Dashboard Option Shortlisted — Light' },
+    { src: shortlistDark, altTodo: true, caption: 'Dashboard Option Shortlisted — Dark' },
+  ]}
+/>
+
+## Challenge
+
+When I joined, the effort to revamp a decade-old portal was already underway. Having worked
+in healthcare design for the past nine years, fintech design was a completely new domain
+for me. To familiarise myself with the product, I conducted a comprehensive tool audit,
+tested various flows, and reviewed existing user feedback. Through discovery and various
+conversations with the design and product teams, I identified recurring issues that
+hindered product development.
+
+Key challenges:
+
+- Design and development inconsistencies due to the absence of robust design components.
+- Difficulty in adding new features because of inconsistent design patterns and technical
+  debt.
+- Transitioning the team from UXPin to Figma within a few months.
+
+## My Role
+
+As lead designer, my responsibilities included:
+
+**Research.** Delving into the latest user research and data analysis to guide and support
+design decisions. Understanding user behaviour and priorities to reshape navigation and
+redesign an experience that empowered users.
+
+**Design.** Collaborating with the product owner and business analysts to grasp business
+needs. Working closely with in-house design and development teams to brainstorm and refine
+designs that align user needs with business goals. Leading cost-saving initiatives by
+shifting from UXPin to Figma, creating a comprehensive style library, templates, and
+reusable components.
+
+I worked alongside the Head of UX, a Product Owner, Business Analysts, UX designers, and
+development teams.
+
+<Figure src={comparison} altTodo caption="Dashboard comparison" />
+
+## Process
+
+### User persona
+
+Of the five shortlisted personas, the Computershare Relationship Manager (RM) was
+identified as the power user. Based on user feedback we discovered that clients were more
+inclined to call the RMs rather than log into the portal. The goal to empower the
+Relationship Manager was a top priority.
+
+<Figure src={persona} altTodo width={600} caption="Sarah Gomez, 34 — Relationship Manager (power user)" />
+
+Sarah's responsibilities are to build strong trusting relationships with clients, provide
+personalised solutions to meet diverse client needs, and ensure high client satisfaction
+and retention. Her challenges are juggling the varied and specific needs of different
+clients, staying informed about each client's changing business environment, and providing
+consistent high-quality service across different client segments.
+
+### Navigation and templates
+
+Based on Google Analytics and the frequency of web pages visited, there was a need to
+revisit the site map because, in the ongoing design, some of the key pages were buried
+within the sub-menu. The existing framework for the template posed a significant barrier to
+adding contextual tools and resources and quick links to documents and relevant sections,
+thereby limiting the site's functionality.
+
+<TwoUp
+  items={[
+    { src: research, altTodo: true, caption: 'Navigation research' },
+    { src: wordcloud, altTodo: true, caption: 'Word cloud from client feedback' },
+  ]}
+/>
+
+Utilising insights from ChatGPT, competitive analysis, and recent data from Google BI,
+along with recent client feedback, I reorganised the menu. I added details and designed new
+mocks in consultation with the design and development teams to ensure feasibility for
+stakeholder presentation. Keeping scalability in mind, the team standardised the template
+designs that would work across all brands, and a UI kit that nailed down all the specifics
+for the design and development process.
+
+<BeforeAfter
+  before={{ src: navBefore, altTodo: true }}
+  after={{ src: navAfter, altTodo: true }}
+  beforeLabel="Before"
+  afterLabel="Reconfigured navigation"
+/>
+
+<Gallery
+  columns={2}
+  items={[
+    { src: wireframe3, altTodo: true, caption: 'Reconfigured dashboard wireframe' },
+    { src: wireframe2, altTodo: true, caption: 'Expanded menu' },
+    { src: draft1, altTodo: true, caption: 'Mock 1' },
+    { src: draftDrawer, altTodo: true, caption: 'Right drawer' },
+  ]}
+/>
+
+### Style guide and components
+
+After multiple iterations and feedback from the key stakeholders, I started to build a
+library of components and templates based on immediate needs and priority. The approved
+batch was added to the Figma library, providing a comprehensive resource for designing new
+prototypes to enhance the overall product offering.
+
+<Gallery
+  columns={2}
+  items={[
+    { src: table1, altTodo: true, caption: 'Table component' },
+    { src: table2, altTodo: true, caption: 'Table component, alternate state' },
+    { src: datePickerLight, altTodo: true, caption: 'Date picker — Light' },
+    { src: datePickerDark, altTodo: true, caption: 'Date picker — Dark' },
+  ]}
+/>
+
+Filters, tables and date pickers were among the most extensively used features in the
+reporting section. Building a set of reusable components expedited the process of
+prototyping one of the largest sections in the portal.
+
+## Key Decisions
+
+**Letting analytics reorder the navigation, not opinion.** Google Analytics showed that
+key pages were buried in the sub-menu while low-traffic pages sat at the top level.
+Reorganising against real page-visit frequency — rather than the existing internal
+hierarchy — was what made the rest of the redesign possible.
+
+**Designing for the Relationship Manager first.** Five personas were shortlisted, but the
+research showed clients were phoning RMs rather than logging in. Treating the RM as the
+power user, and designing to empower them, addressed the call-centre load at its source.
+
+**Building the component library by priority, not completeness.** Rather than attempting a
+full design system up front, I built components against immediate needs — filters, tables,
+date pickers first, since they dominated the reporting section. That got the largest
+section prototyped fastest.
+
+## Outcome
+
+Our combined efforts culminated in a compelling product that not only boasted rich features
+but also provided clear, intuitive navigation, significantly enhancing the user experience.
+
+- Redesigned a product that significantly enhanced the user experience with more intuitive
+  navigation and added features, empowering users in their daily communications and
+  interactions with clients.
+- Introduced a more user-friendly self-service option that encouraged clients to access
+  their individual accounts for quicker responses, significantly reducing the workload of
+  the call centre and enhancing overall customer satisfaction.
+- Successfully transitioned the team from UXPin to Figma, building a comprehensive style
+  library, components, and templates.
+
+### Future enhancements
+
+Based on the most recent feedback, further iterations and enhancements to the design are
+underway. The upcoming launch will showcase a product that offers an interactive dashboard
+with real-time analytics and customisable widgets based on user needs, conformance to WCAG
+2.2 guidelines, light and dark themes, and intuitive navigation with new features.

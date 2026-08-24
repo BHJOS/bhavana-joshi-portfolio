@@ -1,0 +1,22 @@
+---
+/** Oversized editorial quote. Set in the display face, breaking the reading rhythm. */
+interface Props {
+  /** Attribution line. Omit for an unattributed emphasis pull-quote. */
+  cite?: string;
+}
+
+const { cite } = Astro.props;
+---
+
+<figure class="my-16 border-t border-b border-ink py-10">
+  <blockquote class="text-h1 text-balance">
+    <slot />
+  </blockquote>
+  {
+    cite && (
+      <figcaption class="mt-6 text-meta uppercase text-ink-muted">
+        {cite}
+      </figcaption>
+    )
+  }
+</figure>

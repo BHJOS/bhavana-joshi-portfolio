@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/** Responsive image grid. Use for sets of 3+ related images. */
+interface Item {
+  src: ImageMetadata;
+  alt?: string;
+  altTodo?: boolean;
+  caption?: string;
+}
+
+interface Props {
+  items: Item[];
+  /** Columns at the widest breakpoint. Grid steps down on smaller screens. */
+  columns?: 2 | 3 | 4;
+}
+
+const { items, columns = 3 } = Astro.props;
+
+for (const [i, it] of items.entries()) {
+  if (!it.altTodo && it.alt === undefined) {
+    throw new Error(`Gallery: item ${i} needs \`alt\` or \`altTodo\`. Never invent alt text.`);
+  }
+}
+
+const colClass = {
+  2: 'sm:grid-cols-2',
+  3: 'sm:grid-cols-2 lg:grid-cols-3',
+  4: 'sm:grid-cols-2 lg:grid-cols-4',
+}[columns];
+
+const widthHint = { 2: 900, 3: 600, 4: 460 }[columns];
+const sizesHint = {
+  2: '(min-width: 640px) 540px, 100vw',
+  3: '(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw',
+  4: '(min-width: 1024px) 270px, (min-width: 640px) 50vw, 100vw',
+}[columns];
+---
+
+<ul class={`my-12 grid list-none grid-cols-1 gap-6 p-0 ${colClass}`}>
+  {
+    items.map((it) => (
+      <li>
+        <figure>
+          {it.altTodo && <Fragment set:html="<!-- TODO(alt): needs alt text from Bhavana -->" />}
+          <Image
+            src={it.src}
+            alt={it.altTodo ? '' : it.alt!}
+            width={widthHint}
+            densities={[1, 2]}
+            loading="lazy"
+            decoding="async"
+            sizes={sizesHint}
+            class="w-full border border-rule"
+          />
+          {it.caption && (
+            <figcaption class="mt-3 text-meta text-ink-muted normal-case tracking-normal">
+              {it.caption}
+            </figcaption>
+          )}
+        </figure>
+      </li>
+    ))
+  }
+</ul>

@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EMAIL } from '../consts';
+---
+
+<BaseLayout title="Page not found" noindex>
+  <section class="container-content py-32 md:py-48">
+    <p class="text-meta uppercase text-ink-muted">Error 404</p>
+    <h1 class="mt-8 text-display md:text-display-lg text-balance">This page moved on.</h1>
+    <p class="mt-10 max-w-xl text-lead text-ink-muted">
+      The link may be from the old site, or the address may have a typo.
+    </p>
+
+    <ul class="mt-12 flex list-none flex-wrap gap-x-10 gap-y-4 p-0 text-lead">
+      <li>
+        <a href="/" class="underline underline-offset-8 hover:opacity-60">Home</a>
+      </li>
+      <li>
+        <a href="/work" class="underline underline-offset-8 hover:opacity-60">Work</a>
+      </li>
+      <li>
+        <a href="/about" class="underline underline-offset-8 hover:opacity-60">About</a>
+      </li>
+      <li>
+        <a href={`mailto:${EMAIL}`} class="underline underline-offset-8 hover:opacity-60">
+          Email me
+        </a>
+      </li>
+    </ul>
+  </section>
+</BaseLayout>

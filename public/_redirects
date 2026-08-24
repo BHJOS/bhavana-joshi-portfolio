@@ -1,0 +1,29 @@
+# Cloudflare Pages redirects. Format: /source /destination [status]
+# Keeps every URL that existed on the Squarespace site reachable.
+# Verify after deploy: curl -sI https://www.bhavanajoshi.com/case-studies | head -1
+
+# --- Case studies: old flat slugs -> /work/<slug> ------------------------------
+/west-windsor-arts-council   /work/west-windsor-arts-center   301
+/issuer-online               /work/issuer-online              301
+/interactive-visual-aid      /work/interactive-visual-aids    301
+
+# Password-protected variants that existed on Squarespace (captured as 401s in the
+# rescue). Same destination — the new site gates via Cloudflare Access instead.
+/interactive-visual-aid-1-1  /work/interactive-visual-aids    301
+/interactive-visual-aid-pp   /work/interactive-visual-aids    301
+
+# --- Index pages --------------------------------------------------------------
+/case-studies                /work                            301
+/portfolio                   /work                            301
+
+# Squarespace duplicate of the homepage.
+/home                        /                                301
+
+# --- Older portfolio categories ------------------------------------------------
+# These live in the `archive` collection but have no pages yet — Bhavana has not
+# decided whether this work carries over. Sent to /work rather than 404ing.
+# TODO: repoint these if archive pages get built.
+/websites                    /work                            301
+/emails                      /work                            301
+/logos                       /work                            301
+/books                       /work                            301

@@ -23,13 +23,28 @@ const work = defineCollection({
       /** e.g. ["product design", "design systems"] */
       tags: z.array(z.string()).min(1),
       hero: image(),
-      /** Required, and never auto-generated. See CLAUDE.md → Accessibility. */
-      heroAlt: z.string().min(1),
+      /**
+       * Never auto-generated. See CLAUDE.md → Accessibility.
+       * May be empty ONLY when `heroAltTodo` is true — see the refine below.
+       */
+      heroAlt: z.string().default(''),
+      /**
+       * true = Bhavana still needs to write this alt text. The image then renders
+       * with alt="" (silent) rather than a wrong description, and `npm run audit:alt`
+       * reports it. Never set this to false by writing alt text yourself.
+       */
+      heroAltTodo: z.boolean().default(false),
       /** true = sits behind Cloudflare Access after deploy; excluded from sitemap. */
       gated: z.boolean().default(false),
       /** Manual sort on the work index — lower comes first. */
       order: z.number().int(),
-    }),
+    })
+      .refine((d) => d.heroAltTodo || d.heroAlt.trim().length > 0, {
+        message:
+          'heroAlt is empty. Either write real alt text, or set heroAltTodo: true to flag ' +
+          'it for Bhavana. Do not invent a description.',
+        path: ['heroAlt'],
+      }),
 });
 
 /**

@@ -1,0 +1,91 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const getStaticPaths = (async () => {
+  const work = await getCollection('work');
+  return work.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { title, client, year, role, summary, tags, hero, gated } = entry.data;
+const { Content } = await render(entry);
+
+// Ordered siblings, for prev/next at the foot of the study.
+const all = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const idx = all.findIndex((e) => e.id === entry.id);
+const prev = all[idx - 1];
+const next = all[idx + 1];
+---
+
+<BaseLayout
+  title={title}
+  description={summary}
+  ogImage={hero.src}
+  noindex={gated}
+>
+  <article>
+    <header class="container-content pt-16 pb-8 md:pt-24">
+      <p class="text-meta uppercase text-ink-muted">
+        {client} · {year}
+      </p>
+      <h1 class="mt-6 text-display md:text-display-lg text-balance">{title}</h1>
+      <p class="mt-8 max-w-2xl text-lead text-ink-muted text-pretty">{summary}</p>
+
+      <dl class="mt-12 grid grid-cols-1 gap-x-10 gap-y-6 border-t border-rule pt-8 sm:grid-cols-3">
+        <div>
+          <dt class="text-meta uppercase text-ink-muted">Client</dt>
+          <dd class="mt-2 text-body">{client}</dd>
+        </div>
+        <div>
+          <dt class="text-meta uppercase text-ink-muted">Year</dt>
+          <dd class="mt-2 text-body">{year}</dd>
+        </div>
+        <div>
+          <dt class="text-meta uppercase text-ink-muted">Role</dt>
+          <dd class="mt-2 text-body text-pretty">{role}</dd>
+        </div>
+        <div class="sm:col-span-3">
+          <dt class="text-meta uppercase text-ink-muted">Discipline</dt>
+          <dd class="mt-2 text-body">{tags.join(' · ')}</dd>
+        </div>
+      </dl>
+    </header>
+
+    {/*
+      Case-study prose. Headings inside the MDX start at h2, so the outline is
+      h1 (title) -> h2 (Challenge, My Role, ...) -> h3 (sub-steps). No skips.
+    */}
+    <div class="container-content prose-case pb-24">
+      <Content />
+    </div>
+  </article>
+
+  <nav class="border-t border-rule" aria-label="More work">
+    <div class="container-content flex flex-col gap-8 py-12 sm:flex-row sm:justify-between">
+      {
+        prev ? (
+          <a href={`/work/${prev.id}`} class="group no-underline">
+            <span class="text-meta uppercase text-ink-muted">Previous</span>
+            <span class="mt-2 block text-h3 underline-offset-8 group-hover:underline">
+              {prev.data.title}
+            </span>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        next && (
+          <a href={`/work/${next.id}`} class="group text-left no-underline sm:text-right">
+            <span class="text-meta uppercase text-ink-muted">Next</span>
+            <span class="mt-2 block text-h3 underline-offset-8 group-hover:underline">
+              {next.data.title}
+            </span>
+          </a>
+        )
+      }
+    </div>
+  </nav>
+</BaseLayout>

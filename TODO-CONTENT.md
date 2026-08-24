@@ -1,90 +1,125 @@
-# Content I need from you
+# Content status
 
-No `bhavanajoshi-rescue/` folder was found anywhere near this project, so the site is
-scaffolded with **clearly-marked placeholder content**. Nothing on the site is real copy
-or a real image yet.
+The `bhavanajoshi-rescue/` export has been read and the site is built from it. All three
+case studies, the homepage, and the about page now carry **real copy and real images** —
+no placeholder text remains anywhere on the site.
 
-Two ways to unblock this:
-
-- **Option A (preferred):** drop the `bhavanajoshi-rescue/` folder next to this project —
-  I'll read `manifest.json` and build the case studies from it directly.
-- **Option B:** supply the items below by hand.
+`bhavanajoshi-rescue/` is gitignored and untouched. It stays as the archive of originals.
 
 ---
 
-## 1. Case studies — three of them
+## 1. Alt text — 84 images need it
 
-### Issuer Online — Computershare — `gated: true`
+**This is the only thing blocking an accessible launch.**
 
-| Field       | Needed                                                          |
-| ----------- | --------------------------------------------------------------- |
-| `year`      | ☐                                                                |
-| `role`      | ☐ e.g. "Lead Product Designer"                                   |
-| `summary`   | ☐ 1–2 sentences — doubles as the meta description                |
-| `tags`      | ☐ 2–4, e.g. `["product design", "design systems"]`               |
-| `hero`      | ☐ one image, original resolution, landscape                      |
-| `heroAlt`   | ☐ **I will not invent this** — see note on alt text below        |
-| Body copy   | ☐ Challenge · My Role · Process · Key Decisions · Outcome        |
-| Body images | ☐ with alt text for each                                         |
+The Squarespace site had almost no alt text: the rescue `REPORT.txt` records 24 of 26
+missing on West Windsor, 36 of 38 on Interactive Visual Aid, 23 of 37 on Issuer Online.
+Per your own rule, none of it has been invented.
 
-### Interactive Visual Aids — pharma — `gated: true`
+Every flagged image currently renders `alt=""` — silent to a screen reader, rather than
+announced with a confident-sounding guess. Run this to get the full list, file by file
+and line by line:
 
-Same fields as above. Also: **which pharma client** should appear in the `client` field,
-or should it read "Confidential"?
+```bash
+npm run audit:alt
+```
 
-### West Windsor Arts Center — public
+Current count:
 
-Same fields as above. This is the one built end-to-end in Phase 3, so it's the one I need
-first.
+| File | Images needing alt |
+| --- | --- |
+| `src/content/work/interactive-visual-aids.mdx` | 36 |
+| `src/content/work/issuer-online.mdx` | 23 |
+| `src/content/work/west-windsor-arts-center.mdx` | 24 |
+| `src/pages/about.astro` (your portrait) | 1 |
+| **Total** | **84** |
 
----
+**How to fill one in.** In the MDX, replace `altTodo` with real text:
 
-## 2. Homepage
+```diff
+- <Figure src={sitemap} altTodo caption="Site architecture" />
++ <Figure src={sitemap} alt="Six-level site map ..." caption="Site architecture" />
+```
 
-- ☐ **Positioning paragraph** — the 2–3 sentences that sit under "Creativity with purpose."
-      I have the headline from your current site; I don't have this.
-- ☐ **Client logos** — SVG preferred, one file each:
-      Xerox · IBM · BMS · Motorola · Computershare · Suzuki
-      (If you don't have vector versions, say so and I'll set them as text wordmarks
-      instead — that stays on-brand for a monochrome site and costs nothing in payload.)
+For the hero image in front matter, delete `heroAltTodo: true` and add `heroAlt: '...'`.
 
----
+The build **fails** if you leave an image with neither — that is deliberate.
 
-## 3. About page
-
-- ☐ **Bio** — a few paragraphs in your voice.
-- ☐ **Photo of you** — original resolution.
-- ☐ **Alt text for the photo.**
-
-Already have: `bhavana.joshi@gmail.com` and
-`https://www.linkedin.com/in/bhavana-joshi-us`.
+Images that are genuinely decorative should get `alt=""` explicitly, not `altTodo`.
+Tell me which ones and I will set them.
 
 ---
 
-## 4. Decisions I need from you
+## 2. Decisions I need from you
 
-- ☐ **Production domain.** `astro.config.mjs` currently assumes `https://www.bhavanajoshi.com`.
-      Confirm, or give me the Cloudflare Pages URL to use until the DNS cuts over. This
-      drives canonical URLs, absolute `og:image` paths, and the sitemap.
-- ☐ **Old Squarespace URLs.** I have the six paths you listed. If there are others in the
-      wild (from LinkedIn, a résumé PDF, an email signature), list them and I'll add 301s.
-- ☐ **Archive work** — Websites, Emails, Logos, Books. The schema exists; no pages are
-      built. Tell me when you've decided whether it stays.
-- ☐ **Typeface.** Poppins has no variable version — Google ships it only as 18 static
-      weights. I used **Outfit Variable**, the closest geometric sans with a real variable
-      file. If you'd rather have literal Poppins, say so and I'll self-host two static
-      cuts (regular + bold) instead — it costs roughly one extra font request.
+### Repo weight — 80MB of images (please decide before you push)
+
+`src/assets/` holds the 90 original-resolution images the site uses: **80.7MB**. They were
+copied as originals, exactly as you asked.
+
+Worth knowing before this hits GitHub: Astro re-encodes every image at build time anyway,
+so the source format affects **repo size only, not delivered quality**. Converting the
+large PNGs to WebP q90 sources measures at:
+
+> **80.7MB → 13.0MB (−84%)**
+
+Dry run (changes nothing):
+
+```bash
+node scripts/optimize-sources.mjs
+```
+
+Apply it:
+
+```bash
+node scripts/optimize-sources.mjs --apply && npm run verify
+```
+
+I did not run it for you — you said copy the originals, and some people want lossless
+masters in the repo. But it is far cheaper to decide now, at one commit, than after the
+repo is pushed and the 80MB is permanently in history.
+
+### Everything else
+
+- ☐ **Client logos are lossy PNGs** lifted from Squarespace, with the whitespace trimmed
+      off (`scripts/prepare-logos.mjs`). They render acceptably, but Bristol Myers Squibb
+      in particular reads small and soft next to Xerox and IBM. **SVG versions would fix
+      both.** If you have them, drop them in `src/assets/logos/`.
+- ☐ **Two Squarespace pages were password-locked** and could not be captured:
+      `/interactive-visual-aid-1-1` and `/interactive-visual-aid-pp`. Both currently 301 to
+      `/work/interactive-visual-aids`. If they held different content, turn the password
+      off and re-run the rescue, or tell me what was on them.
+- ☐ **Archive work** — Websites, Emails, Logos, Books. Schema exists, no pages built, all
+      four paths 301 to `/work` for now. Say the word if it stays and I will build it.
+- ☐ **Year on Issuer Online** is set to `2024`, inferred from the old site's copyright
+      line. Confirm or correct.
+- ☐ **The IVA client** is credited as **Bristol Myers Squibb**, which the case-study copy
+      names directly ("BMS medical-legal teams", "under the umbrella brand of Bristol Myers
+      Squibb"). Confirm that is fine to state publicly, given the page is gated anyway.
+
+---
+
+## 3. Things the rescue did not contain
+
+- **No alt text**, as above.
+- **No site logo.** `bha_logo_24.png` was the one image that failed to download. The new
+  site uses a text wordmark in the nav instead, which suits the monochrome editorial
+  direction. If you want the mark back, send the file.
+- **No favicon.** Still Astro's default. Send one, or I can set the wordmark initials.
+- **No `og:image` artwork.** I generated a plain type-only fallback at
+  `public/og-default.png` from your tagline. Case-study pages use their own hero, so this
+  only shows for `/`, `/work`, `/about`, and `/404`. Replace it if you want something
+  designed.
+- **Four Squarespace paths 404'd during capture** (`/home-old`, `/home-1`, `/new-page`,
+  `/new-page-1`). They look like abandoned drafts. No redirects were written for them.
 
 ---
 
 ## A note on alt text
 
-Per your own accessibility rule, **I will not write alt text for an image I haven't been
-given context for.** Inventing it produces confident-sounding descriptions that are
-subtly wrong, which is worse for a screen-reader user than no image at all.
+I will not write alt text for an image I lack context for. Inventing it produces
+confident-sounding descriptions that are subtly wrong, which is worse for a screen-reader
+user than silence.
 
-Every image you send should come with a sentence describing what it shows and why it's in
-the case study. If an image is purely decorative, tell me that and it gets `alt=""`.
-
-Any file missing alt text will be **flagged in the Phase 5 verification checklist**, not
-quietly filled in.
+Every image you describe should get a sentence saying what it shows and why it is in the
+case study. `npm run audit:alt` is the checklist.

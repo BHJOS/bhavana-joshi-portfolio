@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Source archive of original-resolution images (~111MB). Never commit.
+# This is the untouched rescue export; the site copies what it needs into src/assets/.
+bhavanajoshi-rescue/

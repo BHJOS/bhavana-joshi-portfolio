@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Gated case studies are excluded from the sitemap and carry <meta name="robots"
+# content="noindex, nofollow">. They are not listed here — a Disallow line would
+# publish the very paths it is meant to keep quiet.
+
+Sitemap: https://www.bhavanajoshi.com/sitemap-index.xml
