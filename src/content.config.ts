@@ -36,6 +36,12 @@ const work = defineCollection({
       heroAltTodo: z.boolean().default(false),
       /** true = sits behind Cloudflare Access after deploy; excluded from sitemap. */
       gated: z.boolean().default(false),
+      /**
+       * true = work-in-progress rewrite under review. The route builds and is
+       * reachable by direct URL, but the entry is excluded from the homepage grid,
+       * the /work index, prev/next navigation, and the sitemap, and gets noindex.
+       */
+      draft: z.boolean().default(false),
       /** Manual sort on the work index — lower comes first. */
       order: z.number().int(),
     })

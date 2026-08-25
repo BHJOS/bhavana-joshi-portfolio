@@ -5,7 +5,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import { SITE_TAGLINE, EMAIL, LINKEDIN, CLIENTS } from '../consts';
 
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
 
 // Client logos are plain PNGs from the old site, so they are globbed rather than
 // imported one by one. eager: they are all above or near the fold.

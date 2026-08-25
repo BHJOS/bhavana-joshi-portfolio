@@ -12,18 +12,24 @@ interface ItemProps {
 
 interface Props {
   items: ItemProps[];
+  /** One caption for the pair as a whole — e.g. a decision both images evidence.
+      Composable with per-item captions. */
+  caption?: string;
 }
 
-const { items } = Astro.props;
+const { items, caption } = Astro.props;
 
 for (const [i, it] of items.entries()) {
   if (!it.altTodo && it.alt === undefined) {
     throw new Error(`TwoUp: item ${i} needs \`alt\` or \`altTodo\`. Never invent alt text.`);
   }
 }
+
+const Wrapper = caption ? 'figure' : 'div';
 ---
 
-<div class="my-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+<Wrapper class="my-12">
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
   {
     items.map((it) => (
       <figure>
@@ -46,4 +52,12 @@ for (const [i, it] of items.entries()) {
       </figure>
     ))
   }
-</div>
+  </div>
+  {
+    caption && (
+      <figcaption class="mt-4 max-w-2xl text-meta text-ink-muted normal-case tracking-normal">
+        {caption}
+      </figcaption>
+    )
+  }
+</Wrapper>

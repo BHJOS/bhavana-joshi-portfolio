@@ -9,21 +9,26 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { title, client, year, role, summary, tags, hero, gated } = entry.data;
+const { title, client, year, role, summary, tags, hero, gated, draft } = entry.data;
 const { Content } = await render(entry);
 
-// Ordered siblings, for prev/next at the foot of the study.
-const all = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+// Ordered siblings, for prev/next at the foot of the study. Drafts are reachable
+// by direct URL but never linked from published pages.
+const all = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+// A draft is not in `all`, so findIndex returns -1 — and all[idx + 1] would then
+// resolve to all[0], linking the draft to an unrelated study. Guard it out.
 const idx = all.findIndex((e) => e.id === entry.id);
-const prev = all[idx - 1];
-const next = all[idx + 1];
+const prev = idx === -1 ? undefined : all[idx - 1];
+const next = idx === -1 ? undefined : all[idx + 1];
 ---
 
 <BaseLayout
   title={title}
   description={summary}
   ogImage={hero.src}
-  noindex={gated}
+  noindex={gated || draft}
 >
   <article>
     <header class="container-content pt-16 pb-8 md:pt-24">

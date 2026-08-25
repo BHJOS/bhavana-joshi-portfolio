@@ -11,6 +11,8 @@ interface Side {
   src: ImageMetadata;
   alt?: string;
   altTodo?: boolean;
+  /** Optional narrating caption under this side, below the badge + image. */
+  caption?: string;
 }
 
 interface Props {
@@ -55,6 +57,9 @@ const sides = [
           sizes="(min-width: 640px) 540px, 100vw"
           class="w-full border border-rule"
         />
+        {s.caption && (
+          <p class="mt-3 text-meta text-ink-muted normal-case tracking-normal">{s.caption}</p>
+        )}
       </figure>
     ))
   }
