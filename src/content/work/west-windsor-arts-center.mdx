@@ -17,6 +17,7 @@ order: 3
 import FullBleed from '../../components/mdx/FullBleed.astro';
 import Figure from '../../components/mdx/Figure.astro';
 import TwoUp from '../../components/mdx/TwoUp.astro';
+import Gallery from '../../components/mdx/Gallery.astro';
 import PullQuote from '../../components/mdx/PullQuote.astro';
 import Stats from '../../components/mdx/Stats.astro';
 
@@ -33,7 +34,8 @@ import email from '../../assets/work/west-windsor-arts-center/wwac-email.png';
 import stationPoster from '../../assets/work/west-windsor-arts-center/6931472984-20869907b8-b.jpg';
 import mallPoster from '../../assets/work/west-windsor-arts-center/6931472506-a91ca6ff4f-b.jpg';
 import launchDay from '../../assets/work/west-windsor-arts-center/volunteers.png';
-import today from '../../assets/work/west-windsor-arts-center/2017-am-and-otw-export-26-of-32.jpg';
+import gallery2017 from '../../assets/work/west-windsor-arts-center/2017-am-and-otw-export-26-of-32.jpg';
+import thriftSale2026 from '../../assets/work/west-windsor-arts-center/eco-arts-thrift-sale-2026.jpg';
 
 <FullBleed
   src={banner}
@@ -183,7 +185,8 @@ Sixteen years on, the center is a fixture of the greater West Windsor community,
 classes and camps, performances in theater, music and dance, literary events,
 exhibitions, and community outreach.
 
-<TwoUp
+<Gallery
+  columns={3}
   items={[
     {
       src: launchDay,
@@ -191,9 +194,14 @@ exhibitions, and community outreach.
       caption: "Launch day, September 2010. The quiet street wasn't quiet anymore.",
     },
     {
-      src: today,
+      src: gallery2017,
       alt: 'A visitor leaning in to study paintings hung salon-style at a gallery exhibition in the center.',
-      caption: 'Seven years in and counting. The center as a working fixture of the community.',
+      caption: 'Seven years in. A gallery exhibition, 2017.',
+    },
+    {
+      src: thriftSale2026,
+      alt: 'A crowded eco arts thrift sale in the theater hall, with shoppers browsing tables of art supplies under the stage lights, beside the Florence Bell Hillier visual arts wing.',
+      caption: 'Sixteen years in. The eco arts thrift sale, August 2026.',
     },
   ]}
 />
