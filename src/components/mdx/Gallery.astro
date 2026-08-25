@@ -14,9 +14,11 @@ interface Props {
   items: Item[];
   /** Columns at the widest breakpoint. Grid steps down on smaller screens. */
   columns?: 2 | 3 | 4;
+  /** One caption for the set as a whole. Composable with per-item captions. */
+  caption?: string;
 }
 
-const { items, columns = 3 } = Astro.props;
+const { items, columns = 3, caption } = Astro.props;
 
 for (const [i, it] of items.entries()) {
   if (!it.altTodo && it.alt === undefined) {
@@ -38,7 +40,8 @@ const sizesHint = {
 }[columns];
 ---
 
-<ul class={`my-12 grid list-none grid-cols-1 gap-6 p-0 ${colClass}`}>
+<figure class="my-12">
+<ul class={`grid list-none grid-cols-1 gap-6 p-0 ${colClass}`}>
   {
     items.map((it) => (
       <li>
@@ -64,3 +67,11 @@ const sizesHint = {
     ))
   }
 </ul>
+{
+  caption && (
+    <figcaption class="mt-4 max-w-2xl text-meta text-ink-muted normal-case tracking-normal">
+      {caption}
+    </figcaption>
+  )
+}
+</figure>
