@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/**
+ * Continuously scrolling client-logo strip. Pure CSS — no client JS.
+ *
+ * Mechanics: the track holds the logo set twice and animates translateX(-50%),
+ * which is exactly one set's width, so the loop is seamless. The second set is
+ * aria-hidden with empty alts, so a screen reader hears each client once.
+ *
+ * Motion: pauses on hover; the global prefers-reduced-motion rule freezes the
+ * animation entirely, leaving a static row.
+ */
+interface Logo {
+  name: string;
+  img: ImageMetadata;
+  /** Rendered height in px, tuned per logo — see CLIENTS in consts.ts. */
+  h: number;
+}
+
+interface Props {
+  logos: Logo[];
+}
+
+const { logos } = Astro.props;
+---
+
+<section class="overflow-hidden py-16" aria-labelledby="clients-heading">
+  <div class="container-content">
+    <h2 id="clients-heading" class="text-meta uppercase text-ink-muted">
+      Selected clients
+    </h2>
+  </div>
+
+  <div class="ticker mt-10 flex w-max">
+    {
+      [false, true].map((isClone) => (
+        <ul
+          class="m-0 flex w-max list-none items-center gap-24 p-0 pr-24"
+          aria-hidden={isClone || undefined}
+        >
+          {logos.map(({ name, img, h }) => (
+            <li class="flex items-center">
+              <Image
+                src={img}
+                alt={isClone ? '' : name}
+                width={400}
+                densities={[1, 2]}
+                loading="lazy"
+                decoding="async"
+                sizes="250px"
+                class="w-auto object-contain opacity-80 grayscale"
+                style={`height:${h}px`}
+              />
+            </li>
+          ))}
+        </ul>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .ticker {
+    animation: ticker-scroll 35s linear infinite;
+  }
+
+  .ticker:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes ticker-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

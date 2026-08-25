@@ -18,12 +18,20 @@ export const NAV_LINKS = [
   { href: '/about', label: 'About' },
 ] as const;
 
-/** Clients shown in the homepage logo row, in display order. */
+/**
+ * Clients shown in the homepage logo ticker, in display order.
+ *
+ * `h` is the rendered height in px, tuned PER LOGO. The files are trimmed to ink
+ * bounds with wildly different aspect ratios (Computershare 5.4:1, Motorola 1:1),
+ * so a uniform cap makes wordmarks tiny and square marks dominant. Tall lockups
+ * (Motorola's circle-plus-wordmark, Suzuki's S) get more height than single-line
+ * wordmarks so every logo reads at the same optical weight.
+ */
 export const CLIENTS = [
-  { name: 'Xerox', file: 'xerox.png' },
-  { name: 'IBM', file: 'ibm.png' },
-  { name: 'Bristol Myers Squibb', file: 'bms.png' },
-  { name: 'Motorola', file: 'moto.png' },
-  { name: 'Computershare', file: 'computershare.png' },
-  { name: 'Suzuki', file: 'suzuki.png' },
+  { name: 'Xerox', file: 'xerox.png', h: 36 },
+  { name: 'IBM', file: 'ibm.png', h: 36 },
+  { name: 'Bristol Myers Squibb', file: 'bms.png', h: 52 },
+  { name: 'Motorola', file: 'moto.png', h: 76 },
+  { name: 'Computershare', file: 'computershare.png', h: 34 },
+  { name: 'Suzuki', file: 'suzuki.png', h: 60 },
 ] as const;

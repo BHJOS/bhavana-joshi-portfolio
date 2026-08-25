@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
+import LogoTicker from '../components/LogoTicker.astro';
 import { SITE_TAGLINE, EMAIL, LINKEDIN, CLIENTS } from '../consts';
 
 const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
@@ -10,15 +10,15 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
 );
 
 // Client logos are plain PNGs from the old site, so they are globbed rather than
-// imported one by one. eager: they are all above or near the fold.
+// imported one by one.
 const logoFiles = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/logos/*.png',
   { eager: true }
 );
-const logos = CLIENTS.map((c) => ({
-  name: c.name,
-  img: logoFiles[`../assets/logos/${c.file}`]?.default,
-})).filter((l) => l.img);
+const logos = CLIENTS.flatMap((c) => {
+  const img = logoFiles[`../assets/logos/${c.file}`]?.default;
+  return img ? [{ name: c.name, img, h: c.h }] : [];
+});
 
 const personSchema = {
   '@context': 'https://schema.org',
@@ -77,37 +77,6 @@ const personSchema = {
     </div>
   </section>
 
-  {/* Client logo row — directly above the footer */}
-  <section class="py-16" aria-labelledby="clients-heading">
-    <div class="container-content">
-      <h2 id="clients-heading" class="text-meta uppercase text-ink-muted">
-        Selected clients
-      </h2>
-      {/*
-        The logos are trimmed to their ink bounds (scripts/prepare-logos.mjs), so their
-        aspect ratios vary from 5.4:1 (Computershare) to 1:1 (Motorola). Capping BOTH
-        height and width keeps them optically balanced — wide wordmarks hit the width
-        cap, square marks hit the height cap — instead of one dwarfing the rest.
-      */}
-      <ul class="mt-8 grid list-none grid-cols-2 items-center gap-x-10 gap-y-12 p-0 sm:grid-cols-3 lg:grid-cols-6">
-        {
-          logos.map(({ name, img }) => (
-            <li class="flex items-center justify-center">
-              <Image
-                src={img!}
-                alt={name}
-                width={320}
-                densities={[1, 2]}
-                loading="lazy"
-                decoding="async"
-                sizes="160px"
-                class="max-h-12 w-auto max-w-[150px] object-contain opacity-75 grayscale"
-              />
-            </li>
-          ))
-        }
-      </ul>
-    </div>
-  </section>
-
+  {/* Client logo ticker — directly above the footer */}
+  <LogoTicker logos={logos} />
 </BaseLayout>
