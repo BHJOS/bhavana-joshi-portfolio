@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { EMAIL, LINKEDIN } from '../consts';
 import portrait from '../assets/about/me.png';
 ---
 
@@ -50,32 +49,6 @@ import portrait from '../assets/about/me.png';
     </div>
   </section>
 
+  {/* Contact CTA lives in the footer — no separate section here. */}
   <div class="h-32 w-full bg-black md:h-48" aria-hidden="true"></div>
-
-  <section class="container-content py-24 md:py-32">
-    <h2 class="text-h1">To start a conversation, please email me.</h2>
-
-    <dl class="mt-12 grid grid-cols-1 gap-x-10 gap-y-8 border-t border-rule pt-8 sm:grid-cols-2">
-      <div>
-        <dt class="text-meta uppercase text-ink-muted">Email</dt>
-        <dd class="mt-2 text-lead">
-          <a href={`mailto:${EMAIL}`} class="underline underline-offset-8 hover:opacity-60">
-            {EMAIL}
-          </a>
-        </dd>
-      </div>
-      <div>
-        <dt class="text-meta uppercase text-ink-muted">LinkedIn</dt>
-        <dd class="mt-2 text-lead">
-          <a
-            href={LINKEDIN}
-            rel="me noopener"
-            class="underline underline-offset-8 hover:opacity-60"
-          >
-            bhavana-joshi-us
-          </a>
-        </dd>
-      </div>
-    </dl>
-  </section>
 </BaseLayout>

@@ -4,27 +4,31 @@ import { EMAIL, LINKEDIN } from '../consts';
 const year = new Date().getFullYear();
 ---
 
+{/*
+  The footer IS the contact CTA — pages do not repeat "start a conversation"
+  sections above it. See CLAUDE.md → Aesthetic for the sanctioned tint.
+*/}
 <footer class="mt-32 bg-footer">
-  <div class="container-content flex flex-col gap-8 py-16 md:flex-row md:items-end md:justify-between">
-    <div>
+  <div class="container-content py-16 md:py-24">
+    <h2 class="text-h1 text-balance">Let's start a conversation.</h2>
+    <p class="mt-8 text-lead">
+      <a href={`mailto:${EMAIL}`} class="underline underline-offset-8 hover:opacity-60">
+        {EMAIL}
+      </a>
+    </p>
+
+    <div class="mt-16 flex flex-col gap-6 border-t border-ink/15 pt-8 md:flex-row md:items-baseline md:justify-between">
       <p class="text-h3 font-semibold tracking-tight">Bhavana Joshi</p>
-      <p class="mt-2 text-body text-ink-muted">
-        <a href={`mailto:${EMAIL}`} class="text-ink underline underline-offset-4 hover:opacity-60">
-          {EMAIL}
-        </a>
-        <span class="mx-2 text-rule" aria-hidden="true">|</span>
-        <a
-          href={LINKEDIN}
-          rel="me noopener"
-          class="text-ink underline underline-offset-4 hover:opacity-60"
-        >
-          LinkedIn
-        </a>
+      <a
+        href={LINKEDIN}
+        rel="me noopener"
+        class="text-body underline underline-offset-4 hover:opacity-60"
+      >
+        LinkedIn
+      </a>
+      <p class="text-meta uppercase text-ink-muted">
+        © {year} Bhavana Joshi. All rights reserved.
       </p>
     </div>
-
-    <p class="text-meta uppercase text-ink-muted">
-      © {year} Bhavana Joshi. All rights reserved.
-    </p>
   </div>
 </footer>
