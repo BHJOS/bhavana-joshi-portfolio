@@ -9,7 +9,11 @@ import tailwindcss from '@tailwindcss/vite';
  * Cloudflare Access after deploy. Kept in sync with `gated: true` in the work collection.
  * TODO(phase 4): derive this from the content collection instead of hand-maintaining it.
  */
-const GATED_PATHS = ['/work/issuer-online', '/work/interactive-visual-aids'];
+const GATED_PATHS = [
+  '/work/issuer-online',
+  '/work/interactive-visual-aids',
+  '/work/west-windsor-arts-center-v2', // draft under review — not gated, just unlisted
+];
 
 // https://astro.build/config
 export default defineConfig({

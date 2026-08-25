@@ -64,8 +64,17 @@ If a design decision would introduce color to chrome, the answer is no.
 
 Bhavana's existing site copy. `"Creativity with purpose."`
 
-Short, declarative sentences. No exclamation marks. No marketing hype. No em-dash-heavy
-throat-clearing. Write it the way a confident designer talks about their own work.
+Short, declarative sentences. No exclamation marks. No marketing hype. Write it the way
+a confident designer talks about their own work.
+
+Hard style rules for all visible prose — body copy, headings, captions, stat labels,
+meta descriptions (Bhavana, 2026-08; enforced across all pages):
+
+- **No colons, no semicolons, no em dashes.** Recast as separate sentences or commas.
+  Exemptions: alt text (screen-reader prose, not displayed) and the `<title>` separator
+  ("Page — Bhavana Joshi").
+- **American English spellings** throughout. Careful: `aria-labelledby` is an ARIA spec
+  attribute (double L by definition), never "corrected".
 
 ---
 
@@ -133,9 +142,14 @@ order:   number    // manual sort on the index — lower comes first
 
 ### Case-study body structure
 
-Every case study uses these sections, in this order, as `<h2>`s:
+Results-first narrative, established by the August 2026 redrafts (all three studies):
 
-**Challenge → My Role → Process → Key Decisions → Outcome**
+**Hero + 4-item proof strip (Stats) → constraint/insight-led opening → My role →
+2-3 story sections → Results.**
+
+Every image carries a narrating caption (what decision it shows or constraint it
+solves) and observed alt text. One artifact per idea — near-duplicate images get cut,
+not stacked.
 
 ### `archive` collection — `src/content/archive/*.md`
 
