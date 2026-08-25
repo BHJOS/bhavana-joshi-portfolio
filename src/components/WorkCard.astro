@@ -8,14 +8,21 @@ interface Props {
   loading?: 'lazy' | 'eager';
   /** Heading level, so the card fits the host page's outline without skips. */
   headingLevel?: 'h2' | 'h3';
+  /** 'dark' when the card sits on a black section (homepage). Text flips to paper.
+      paper/60 on black is ~5.9:1, an AA pass for the 13px meta lines. */
+  tone?: 'light' | 'dark';
 }
 
-const { entry, loading = 'lazy', headingLevel: Heading = 'h3' } = Astro.props;
+const { entry, loading = 'lazy', headingLevel: Heading = 'h3', tone = 'light' } = Astro.props;
 const { title, client, year, tags, hero, heroAlt, heroAltTodo, gated } = entry.data;
 
 // A flagged image renders silent rather than announcing a placeholder string.
 // The card title directly follows, so the link is never unlabeled.
 const alt = heroAltTodo ? '' : heroAlt;
+
+const dark = tone === 'dark';
+const metaClass = dark ? 'text-paper/60' : 'text-ink-muted';
+const strongClass = dark ? 'text-paper' : 'text-ink';
 ---
 
 <article class="group">
@@ -28,20 +35,26 @@ const alt = heroAltTodo ? '' : heroAlt;
       loading={loading}
       decoding="async"
       sizes="(min-width: 768px) 520px, 100vw"
-      class="w-full border border-rule transition-opacity group-hover:opacity-85"
+      class:list={[
+        'w-full border transition-opacity group-hover:opacity-85',
+        dark ? 'border-paper/20' : 'border-rule',
+      ]}
     />
 
     <div class="mt-5">
-      <p class="text-meta uppercase text-ink-muted">
+      <p class:list={['text-meta uppercase', metaClass]}>
         {client} · {year}
-        {gated && <span class="ml-2 text-ink">· Password protected</span>}
+        {gated && <span class:list={['ml-2', strongClass]}>· Password protected</span>}
       </p>
       <Heading
-        class="mt-2 text-h2 text-ink underline-offset-8 group-hover:underline decoration-1"
+        class:list={[
+          'mt-2 text-h2 underline-offset-8 group-hover:underline decoration-1',
+          strongClass,
+        ]}
       >
         {title}
       </Heading>
-      <p class="mt-3 text-meta uppercase text-ink-muted">{tags.join(' · ')}</p>
+      <p class:list={['mt-3 text-meta uppercase', metaClass]}>{tags.join(' · ')}</p>
     </div>
   </a>
 </article>

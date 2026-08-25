@@ -54,8 +54,31 @@ const personSchema = {
     </div>
   </section>
 
-  {/* Client logo row */}
-  <section class="border-t border-b border-rule py-12" aria-labelledby="clients-heading">
+  {/* Featured work — the accent black block, cards in dark tone */}
+  <section class="bg-black py-24 md:py-32" aria-labelledby="work-heading">
+    <div class="container-content">
+      <div class="flex items-baseline justify-between">
+        <h2 id="work-heading" class="text-h1 text-paper">Selected work</h2>
+        <a
+          href="/work"
+          class="text-meta uppercase text-paper underline underline-offset-8 hover:opacity-60"
+        >
+          All work
+        </a>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 gap-x-10 gap-y-16 md:grid-cols-2">
+        {
+          work.map((entry, i) => (
+            <WorkCard entry={entry} tone="dark" loading={i < 2 ? 'eager' : 'lazy'} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* Client logo row — directly above the footer */}
+  <section class="py-16" aria-labelledby="clients-heading">
     <div class="container-content">
       <h2 id="clients-heading" class="text-meta uppercase text-ink-muted">
         Selected clients
@@ -84,20 +107,6 @@ const personSchema = {
           ))
         }
       </ul>
-    </div>
-  </section>
-
-  {/* Featured work */}
-  <section class="container-content py-24 md:py-32" aria-labelledby="work-heading">
-    <div class="flex items-baseline justify-between">
-      <h2 id="work-heading" class="text-h1">Selected work</h2>
-      <a href="/work" class="text-meta uppercase text-ink underline underline-offset-8 hover:opacity-60">
-        All work
-      </a>
-    </div>
-
-    <div class="mt-12 grid grid-cols-1 gap-x-10 gap-y-16 md:grid-cols-2">
-      {work.map((entry, i) => <WorkCard entry={entry} loading={i < 2 ? 'eager' : 'lazy'} />)}
     </div>
   </section>
 
