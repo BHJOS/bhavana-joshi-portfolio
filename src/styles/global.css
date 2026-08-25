@@ -52,7 +52,7 @@
   --text-meta--letter-spacing: 0.08em;
   --text-meta--font-weight: 500;
 
-  /* Colour — monochrome only. The work is the colour. -------------------- */
+  /* Color — monochrome only. The work is the color. -------------------- */
   --color-ink: #111111; /* body + headline text        18.9:1 on white */
   --color-ink-muted: #595959; /* meta text, captions          7.0:1 on white */
   --color-black: #000000; /* section-break blocks only                  */
@@ -135,7 +135,7 @@
   }
 }
 
-/* Break an element out of the centred column to full viewport width.
+/* Break an element out of the centered column to full viewport width.
    The one permitted escape from the content column — case-study imagery. */
 /**
  * `100vw` includes the classic desktop scrollbar gutter, so a 100vw child
@@ -147,7 +147,7 @@
  * `100cqw` resolves against body's content box, which EXCLUDES the scrollbar —
  * so the image is exactly as wide as the usable page and nothing overflows.
  * The vw pair is kept first as a fallback for browsers without container
- * queries; they get the old behaviour rather than a broken layout.
+ * queries; they get the old behavior rather than a broken layout.
  */
 @utility full-bleed {
   width: 100vw;

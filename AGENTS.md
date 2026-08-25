@@ -32,13 +32,13 @@ Minimal black-and-white editorial.
 
 - White background. Near-black text `#111`. Generous whitespace.
 - Pure black (`#000`) blocks used as section breaks — the only "accent".
-- **No** gradients. **No** drop shadows. **No** rounded-corner cards. **No** decorative colour.
-- Rules/borders are hairline (`1px`) and near-black or a light grey — never mid-grey mush.
+- **No** gradients. **No** drop shadows. **No** rounded-corner cards. **No** decorative color.
+- Rules/borders are hairline (`1px`) and near-black or a light gray — never mid-gray mush.
 
-### The work is the colour.
+### The work is the color.
 
 The UI stays monochrome so that case-study imagery supplies every bit of visual interest.
-If a design decision would introduce colour to chrome, the answer is no.
+If a design decision would introduce color to chrome, the answer is no.
 
 ---
 
@@ -69,7 +69,7 @@ throat-clearing. Write it the way a confident designer talks about their own wor
 ## Layout
 
 - **Mobile-first.** Design the small screen first, then add breakpoints upward.
-- Max content width **~1100px** (`--container-content`), centred.
+- Max content width **~1100px** (`--container-content`), centered.
 - Case-study images may break out to **full-bleed** — that is the one permitted escape
   from the content column.
 - Vertical rhythm comes from the spacing scale, not from ad-hoc margins.
@@ -151,7 +151,7 @@ image-dense, and these are how the images get to breathe.
 | ------------- | ---------------------------------------------- |
 | `FullBleed`   | Edge-to-edge image, escapes the content column |
 | `TwoUp`       | Two images side by side, stacking on mobile    |
-| `BeforeAfter` | Labelled before/after comparison pair          |
+| `BeforeAfter` | Labeled before/after comparison pair          |
 | `Gallery`     | Responsive image grid                          |
 | `PullQuote`   | Oversized editorial quote                      |
 | `Stats`       | Results/outcome row of figures                 |

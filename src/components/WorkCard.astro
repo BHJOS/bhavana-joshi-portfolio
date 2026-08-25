@@ -14,7 +14,7 @@ const { entry, loading = 'lazy', headingLevel: Heading = 'h3' } = Astro.props;
 const { title, client, year, tags, hero, heroAlt, heroAltTodo, gated } = entry.data;
 
 // A flagged image renders silent rather than announcing a placeholder string.
-// The card title directly follows, so the link is never unlabelled.
+// The card title directly follows, so the link is never unlabeled.
 const alt = heroAltTodo ? '' : heroAlt;
 ---
 
