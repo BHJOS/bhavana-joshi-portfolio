@@ -177,7 +177,9 @@
     font-size: var(--text-h1);
     line-height: var(--text-h1--line-height);
     letter-spacing: var(--text-h1--letter-spacing);
-    font-weight: var(--text-h1--font-weight);
+    /* 500, not the h1 token's 700 — Bhavana's call (2026-08): section heads
+       read editorial at 44px; the page h1 and stat values keep the heavy 700. */
+    font-weight: 500;
   }
 
   .prose-case > h3:not([class]) {
