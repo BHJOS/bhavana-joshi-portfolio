@@ -1,14 +1,15 @@
 ---
-title: 'Launch a Community Arts Center'
+# Restructured 2026-08-25 per CaseStudyRedraft-ArtsCenter-Aug2026.docx, approved by
+# Bhavana. Results-first: proof strip, constraint-led opening, linked NYT pull quote,
+# 14 images (was 24).
+title: 'Launching the West Windsor Arts Center'
 client: 'West Windsor Arts Council'
 year: 2010
-role: 'Research, Strategy, Concept, Design, UX, UI, Rapid Prototyping, User Testing'
+role: 'Marketing Committee Chair'
 summary: 'An old firehouse became a community arts center. As marketing committee chair, I led the brand design and launch campaign on a volunteer budget.'
 tags: ['brand design', 'campaign', 'web design']
 hero: '../../assets/work/west-windsor-arts-center/wwac-tmb.png'
-# Alt text not supplied by the rescue manifest. Flagged rather than invented —
-# renders alt="" until Bhavana writes it. See `npm run audit:alt`.
-heroAltTodo: true
+heroAlt: 'Launch collage in the arts center brand, with the ARTS lettering poster and the fall events calendar set diagonally in orange and green.'
 gated: false
 order: 3
 ---
@@ -16,203 +17,183 @@ order: 3
 import FullBleed from '../../components/mdx/FullBleed.astro';
 import Figure from '../../components/mdx/Figure.astro';
 import TwoUp from '../../components/mdx/TwoUp.astro';
-import BeforeAfter from '../../components/mdx/BeforeAfter.astro';
-import Gallery from '../../components/mdx/Gallery.astro';
 import PullQuote from '../../components/mdx/PullQuote.astro';
 import Stats from '../../components/mdx/Stats.astro';
 
 import banner from '../../assets/work/west-windsor-arts-center/bg-image-l.png';
-import ideation from '../../assets/work/west-windsor-arts-center/ideation.png';
+import teamPhoto from '../../assets/work/west-windsor-arts-center/6931466608-e80e807895-b.jpg';
 import logoOptions from '../../assets/work/west-windsor-arts-center/logo-options.png';
 import colors from '../../assets/work/west-windsor-arts-center/colors-2x.png';
 import type_ from '../../assets/work/west-windsor-arts-center/type-2x.png';
-import signWindow from '../../assets/work/west-windsor-arts-center/wwac-h.jpg';
-import signPhoto from '../../assets/work/west-windsor-arts-center/screen-shot-2010-06-21-at-3-52-11-pm.png';
+import firehouse from '../../assets/work/west-windsor-arts-center/screen-shot-2010-06-21-at-3-52-11-pm.png';
+import campaignMap from '../../assets/work/west-windsor-arts-center/ideation.png';
 import sitemap from '../../assets/work/west-windsor-arts-center/sitemap-2x.png';
-import round1 from '../../assets/work/west-windsor-arts-center/ww-arts-center-landingpage.png';
-import round2a from '../../assets/work/west-windsor-arts-center/ww-arts-center-home.png';
-import round2b from '../../assets/work/west-windsor-arts-center/ww-arts-center-home-2.png';
+import homepage from '../../assets/work/west-windsor-arts-center/ww-arts-center-home-2.png';
 import email from '../../assets/work/west-windsor-arts-center/wwac-email.png';
-import facebook from '../../assets/work/west-windsor-arts-center/wwac-facebook.png';
-import blockParty from '../../assets/work/west-windsor-arts-center/block-party.png';
-import flyer from '../../assets/work/west-windsor-arts-center/wwac-flyer.png';
-import event1 from '../../assets/work/west-windsor-arts-center/6931473186-8af51c85ae-b.jpg';
-import event2 from '../../assets/work/west-windsor-arts-center/6931472984-20869907b8-b.jpg';
-import event3 from '../../assets/work/west-windsor-arts-center/6931472506-a91ca6ff4f-b.jpg';
-import tshirt from '../../assets/work/west-windsor-arts-center/red-tshirt.jpg';
-import volunteers from '../../assets/work/west-windsor-arts-center/volunteers.png';
-import event4 from '../../assets/work/west-windsor-arts-center/6931466608-e80e807895-b.jpg';
-import student from '../../assets/work/west-windsor-arts-center/student-400x284.jpg';
+import stationPoster from '../../assets/work/west-windsor-arts-center/6931472984-20869907b8-b.jpg';
+import mallPoster from '../../assets/work/west-windsor-arts-center/6931472506-a91ca6ff4f-b.jpg';
+import launchDay from '../../assets/work/west-windsor-arts-center/volunteers.png';
 import today from '../../assets/work/west-windsor-arts-center/2017-am-and-otw-export-26-of-32.jpg';
 
-<FullBleed src={banner} altTodo loading="eager" />
+<FullBleed
+  src={banner}
+  alt="Banner in the arts center's red and green brand colors with four photos of programs in action. Children performing theater, a gallery visitor viewing an exhibition, and kids painting at easels."
+  caption="The center in action. Performances, exhibitions, and classes, sixteen years and counting."
+  loading="eager"
+/>
 
-At the beginning of 2010, and after eight years of planning, the West Windsor township
-finally agreed to lease the old firehouse to the local arts council to convert it into an
-Arts Center. While the eight-month-long renovation was on, preparations started for a
-successful launch. As the marketing committee chair, I led the brand design and marketing
-campaign.
-
-## Challenge
-
-West Windsor is a township in New Jersey with a population of 28,074, ethnically diverse
-and affluent. Other than highly rated school districts, there isn't much to do in West
-Windsor save for a couple of restaurants, malls, and parks in neighboring towns. The
-local arts council hoped to inject some excitement with a diverse offering of art classes,
-musical performances, dance, and art exhibitions.
-
-The building was situated on a quiet street that people would often overlook on their way
-to the train station or the strip mall nearby. As a volunteer-run organization, there were
-limited funds available to promote the organization and garner interest prior to the
-launch.
-
-### Insights
-
-- The target audience was primarily composed of seniors or adults.
-- Only a small group of people were familiar with the Arts Council.
-- This lack of awareness made fundraising a challenge.
-- Without a home of their own, the arts council was forced to host small-scale events at
-  the local library or a local park, thereby reducing attendance.
-
-## My Role
-
-Research, Strategy, Concept, Design, UX, UI, Rapid Prototyping, User testing.
-
-## Process
-
-### Ideation
-
-<Figure src={ideation} altTodo />
-
-### Logo
-
-<Figure src={logoOptions} altTodo />
-
-### Style Guide
-
-<TwoUp
+<Stats
   items={[
-    { src: colors, altTodo: true, caption: 'Color palette' },
-    { src: type_, altTodo: true, caption: 'Typography' },
+    { value: 'NYT', label: 'The New York Times covered the launch' },
+    { value: '16 years', label: 'launched in 2010 and thriving today' },
+    { value: '~$0', label: 'marketing budget, volunteer-run with donated services' },
+    { value: 'A home', label: 'from borrowed library rooms to a building of its own' },
   ]}
 />
 
-### Signs
+## The building nobody noticed.
 
-As part of a teaser campaign, our team proposed painting murals on some of the nearby
-boarded storefronts. However, the township denied this request. The next option was to use
-the windows of the firehouse to draw the attention of passers-by. As renovations
-progressed, the new signs in the window started to attract more attention.
+After eight years of planning, West Windsor township finally leased the old firehouse to
+the local arts council. The building sat on a quiet street that commuters passed on their
+way to the train station without a glance. The council had no marketing budget, an
+audience that skewed older, and a name few residents recognized. Without a home of its
+own, its events had been scattered across the library and local parks, and attendance
+showed it. Eight months of renovation stood between the lease and the launch. The brief
+was to make the town care before the doors opened.
+
+## My role
+
+As marketing committee chair, a volunteer role, I led the brand and launch end to end,
+from research and strategy through the identity system, the website design and build,
+email and social, print, and publicity, working with a volunteer team and donated
+services.
+
+<Figure
+  src={teamPhoto}
+  alt="Fifteen volunteers in red arts center shirts holding a banner that reads West Windsor Arts Center, the junction where arts and community meet."
+  caption="The volunteer team behind the launch, under the brand they carried everywhere."
+/>
+
+## The brand
+
+A firehouse turned arts center needed an identity that honored both. The approved mark
+abstracts the building itself, with stepped blocks tracing the 1931 firehouse's gable,
+and the tagline nods to the neighborhood. The junction where arts and community meet.
+The mark had to feel vibrant enough to promise excitement and legible enough for an
+audience that skewed senior. That requirement drove the palette, the type choices, and
+every application from window signage to email templates.
+
+<Figure
+  src={logoOptions}
+  alt="Logo exploration sheet. The old West Windsor Arts Council mark, an alternate arch-shaped option, and the approved options, in which stepped orange and green blocks trace the firehouse's gable."
+  caption="From the old council mark to the approved options. The stepped blocks trace the firehouse's 1931 gable."
+/>
 
 <TwoUp
+  caption="A vibrant palette and generous, legible type. Excitement for the town, accessibility for an audience that skews senior."
   items={[
-    { src: signWindow, altTodo: true },
     {
-      src: signPhoto,
-      altTodo: true,
-      caption: 'This vibrant teaser graphic by Jeff Tryon set the tone for the entire launch.',
+      src: colors,
+      alt: 'Brand color specimen. Primary red-orange, green, amber, and charcoal, with secondary magenta, cyan, and purple, each with CMYK and hex values.',
+    },
+    {
+      src: type_,
+      alt: 'Typography specimen. Serifa slab serif as the logotype and primary face, Swiss as the secondary face, and Arial for internal communication.',
     },
   ]}
 />
 
-### Website
+## The building becomes the billboard
 
-One of the most labor-intensive parts of this campaign was configuring and mapping out
-content for the website.
+The township said no to our best idea, murals on the boarded storefronts nearby. So we
+made the building advertise itself. As renovation progressed, the firehouse's own windows
+became the teaser campaign, with vibrant graphics by Jeff Tryon announcing what was
+coming to everyone walking to the train. The denial turned out to be a gift. The campaign
+lived rent-free on the one surface we fully controlled.
 
-**Key considerations**
-
-- The web design should be clean, yet visually stimulating.
-- The navigation and site architecture should be simple and intuitive in order to
-  accommodate a wide audience.
-
-<Figure src={sitemap} altTodo caption="Site architecture" />
-
-### Prototype
-
-<BeforeAfter
-  before={{ src: round1, altTodo: true }}
-  after={{ src: round2a, altTodo: true }}
-  beforeLabel="Round 1, interim page"
-  afterLabel="Round 2, approved"
+<Figure
+  src={firehouse}
+  alt="The 1931 Princeton Junction firehouse mid-renovation, doors boarded and caution tape up, with bright ARTS COMING SOON graphics filling the front windows."
+  caption="Denied a mural permit, the campaign moved to the one surface we controlled. The building's own windows, with art by Jeff Tryon."
 />
 
-As I was planning and designing the final website, I built the Round 1 page in Dreamweaver
-as a placeholder to keep visitors engaged with regular updates and announcements.
+## Launch on a shoestring
 
-<Figure src={round2b} altTodo caption="Round 2, approved. The full home page." />
+Everything ran on donated, free, or discounted resources. While I designed the full site,
+an interim page I built in Dreamweaver kept early visitors engaged with updates. The
+final site's architecture stayed deliberately simple, clean but visually stimulating and
+navigable by the widest possible audience. A free Constant Contact account carried a
+branded email template to 1,000 subscribers. A new Facebook page gave the center its
+first social presence. A local printer ran our flyers at a discount, and two weeks before
+launch, posters went up at the train station and the mall, exactly where the audience
+already was.
 
-### Email and social
+<Figure
+  src={campaignMap}
+  alt="Campaign planning diagram with the Arts Center at the center and spokes for brand identity, coming soon, save the date, and mailed invitations, alongside dates for the block party, art reception, and fundraiser."
+  caption="One volunteer team, one map. The whole launch campaign on a page, from save-the-date to block party."
+/>
 
-I initially signed up for a free account with Constant Contact that provided access for up
-to 1,000 subscribers. Next, I set up a bespoke template using the new brand guidelines. I
-also created a brand new Facebook page for the Arts Center and sent out a link to our
-subscribers.
+<Figure
+  src={sitemap}
+  alt="Website sitemap. Eight top-level sections from Home to Support Us, each with at most one level of pages beneath, plus a global navigation key."
+  caption="An architecture simple enough for the widest audience in town, nothing more than two levels deep."
+/>
+
+<Figure
+  src={homepage}
+  alt="The launch website's home page. The stepped-block logo, a photo of a painting class, an events calendar, upcoming events, and tiles for classes, the donor wall, and the capital campaign."
+  caption="The launch site. Clean, vibrant, and built by hand. There was no budget for anything else."
+/>
+
+<Figure
+  src={email}
+  alt="Branded email template with the arts center logo, the ARTS grand opening artwork beside a photo of the firehouse, and a listing for an art and science camp."
+  caption="The branded Constant Contact template. A free account, 1,000 subscribers, and the center's first owned channel."
+/>
 
 <TwoUp
+  caption="Posted where the audience already was. The Princeton Junction platform and the MarketFair mall, two weeks before launch."
   items={[
-    { src: email, altTodo: true, caption: 'Constant Contact template' },
-    { src: facebook, altTodo: true, caption: 'Facebook page' },
+    {
+      src: stationPoster,
+      alt: 'The ARTS grand opening poster on the Princeton Junction train platform, beside the station sign.',
+    },
+    {
+      src: mallPoster,
+      alt: 'The grand opening poster on a stand in the MarketFair mall, in front of the Barnes and Noble entrance.',
+    },
   ]}
 />
 
-### Posters and flyers
+## Results and the long run
 
-A local printer offered to print our flyers at a discounted rate. We distributed flyers at
-sites where we had previously hosted events, and hung several posters outside local
-businesses. Two weeks before the launch date, posters went up at the train station and the
-local mall.
+The launch worked, well enough that The New York Times came to see it.
 
-<Gallery
-  items={[
-    { src: blockParty, altTodo: true },
-    { src: flyer, altTodo: true },
-    { src: event1, altTodo: true },
-    { src: event2, altTodo: true },
-    { src: event3, altTodo: true },
-  ]}
-/>
-
-### Publicity and local events
-
-<Gallery
-  columns={3}
-  items={[
-    { src: tshirt, altTodo: true },
-    { src: volunteers, altTodo: true },
-    { src: event4, altTodo: true },
-  ]}
-/>
-
-## Key Decisions
-
-**Turning a rejection into the campaign's best asset.** When the township denied the mural
-proposal, the firehouse windows became the canvas instead. The signs sat directly on the
-route people already walked to the train station, so the renovation itself became the
-advertising.
-
-**Shipping an interim page rather than waiting for the real site.** A Dreamweaver
-placeholder kept visitors engaged with updates for months while the full site was still
-being designed, so awareness started building before launch instead of at it.
-
-**Building the campaign on free tiers.** Constant Contact's free plan covered 1,000
-subscribers and a new Facebook page cost nothing. For a volunteer-run organization with no
-promotional budget, the constraint set the channel strategy.
-
-## Outcome
-
-<PullQuote cite="The New York Times">
-  A Space for Music, Paintings and a Few Fire Trucks
+<PullQuote cite="The New York Times, January 2011">
+  <a
+    href="https://www.nytimes.com/2011/01/09/nyregion/09artsnj.html"
+    class="underline underline-offset-8 hover:opacity-60"
+  >
+    A Space for Music, Paintings and a Few Fire Trucks
+  </a>
 </PullQuote>
 
-Since its launch in 2010, the arts center has grown into a thriving gathering point for the
-greater West Windsor community. It offers arts education classes and camps, community
-outreach events and rental space, select performances in theater, music, and dance,
-literary events, and art exhibitions.
+Sixteen years on, the center is a fixture of the greater West Windsor community, with
+classes and camps, performances in theater, music and dance, literary events,
+exhibitions, and community outreach.
 
 <TwoUp
   items={[
-    { src: student, altTodo: true },
-    { src: today, altTodo: true },
+    {
+      src: launchDay,
+      alt: 'Two young volunteers in red arts center shirts collecting donations at the launch block party, with tents and a crowd behind them.',
+      caption: "Launch day, September 2010. The quiet street wasn't quiet anymore.",
+    },
+    {
+      src: today,
+      alt: 'A visitor leaning in to study paintings hung salon-style at a gallery exhibition in the center.',
+      caption: 'Seven years in and counting. The center as a working fixture of the community.',
+    },
   ]}
 />

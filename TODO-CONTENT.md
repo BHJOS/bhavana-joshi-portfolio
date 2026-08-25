@@ -30,9 +30,12 @@ Current count:
 | --- | --- |
 | `src/content/work/interactive-visual-aids.mdx` | 0 — done in the 2026-08-25 redraft |
 | `src/content/work/issuer-online.mdx` | 0 — done in the 2026-08-25 redraft |
-| `src/content/work/west-windsor-arts-center.mdx` | 24 |
+| `src/content/work/west-windsor-arts-center.mdx` | 0 — done in the 2026-08-25 redraft |
 | `src/pages/about.astro` (your portrait) | 1 |
-| **Total** | **25** |
+| **Total** | **1** |
+
+The only remaining alt-text gap on the whole site is **your portrait on /about** — one
+sentence from you and the site is fully described.
 
 **How to fill one in.** In the MDX, replace `altTodo` with real text:
 
