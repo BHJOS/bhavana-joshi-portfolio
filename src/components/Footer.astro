@@ -11,21 +11,21 @@ const year = new Date().getFullYear();
 <footer class="mt-32 bg-footer">
   <div class="container-content py-16 md:py-24">
     <h2 class="text-h1 text-balance">Let's start a conversation.</h2>
-    <p class="mt-8 text-lead">
+    <p class="mt-8 flex flex-wrap items-baseline gap-x-8 gap-y-3 text-lead">
       <a href={`mailto:${EMAIL}`} class="underline underline-offset-8 hover:opacity-60">
         {EMAIL}
+      </a>
+      <a
+        href={LINKEDIN}
+        rel="me noopener"
+        class="underline underline-offset-8 hover:opacity-60"
+      >
+        LinkedIn
       </a>
     </p>
 
     <div class="mt-16 flex flex-col gap-6 border-t border-ink/15 pt-8 md:flex-row md:items-baseline md:justify-between">
       <p class="text-h3 font-semibold tracking-tight">Bhavana Joshi</p>
-      <a
-        href={LINKEDIN}
-        rel="me noopener"
-        class="text-body underline underline-offset-4 hover:opacity-60"
-      >
-        LinkedIn
-      </a>
       <p class="text-meta uppercase text-ink-muted">
         © {year} Bhavana Joshi. All rights reserved.
       </p>
