@@ -58,6 +58,9 @@
   --color-black: #000000; /* section-break blocks only                  */
   --color-paper: #ffffff;
   --color-rule: #e2e2e2; /* hairline borders                           */
+  /* Footer tint, carried over from the Squarespace site: its footer used the
+     theme's lightAccent, hsl(60 7.46% 86.86%). The one sanctioned tint. */
+  --color-footer: #e0e0db;
 
   /* Layout ---------------------------------------------------------------- */
   --container-content: 1100px;

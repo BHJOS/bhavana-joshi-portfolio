@@ -32,6 +32,9 @@ Minimal black-and-white editorial.
 
 - White background. Near-black text `#111`. Generous whitespace.
 - Pure black (`#000`) blocks used as section breaks — the only "accent".
+- One sanctioned tint: the footer background `--color-footer: #e0e0db`, carried over
+  from the Squarespace site's footer (its lightAccent, hsl(60 7.46% 86.86%)). Nothing
+  else gets a tint.
 - **No** gradients. **No** drop shadows. **No** rounded-corner cards. **No** decorative color.
 - Rules/borders are hairline (`1px`) and near-black or a light gray — never mid-gray mush.
 
