@@ -29,10 +29,10 @@ Current count:
 | File | Images needing alt |
 | --- | --- |
 | `src/content/work/interactive-visual-aids.mdx` | 36 |
-| `src/content/work/issuer-online.mdx` | 23 |
+| `src/content/work/issuer-online.mdx` | 0 — done in the 2026-08-25 redraft |
 | `src/content/work/west-windsor-arts-center.mdx` | 24 |
 | `src/pages/about.astro` (your portrait) | 1 |
-| **Total** | **84** |
+| **Total** | **61** |
 
 **How to fill one in.** In the MDX, replace `altTodo` with real text:
 
