@@ -55,32 +55,12 @@ Tell me which ones and I will set them.
 
 ## 2. Decisions I need from you
 
-### Repo weight — 80MB of images (please decide before you push)
+### Repo weight — resolved 2026-08-27
 
-`src/assets/` holds the 90 original-resolution images the site uses: **80.7MB**. They were
-copied as originals, exactly as you asked.
-
-Worth knowing before this hits GitHub: Astro re-encodes every image at build time anyway,
-so the source format affects **repo size only, not delivered quality**. Converting the
-large PNGs to WebP q90 sources measures at:
-
-> **80.7MB → 13.0MB (−84%)**
-
-Dry run (changes nothing):
-
-```bash
-node scripts/optimize-sources.mjs
-```
-
-Apply it:
-
-```bash
-node scripts/optimize-sources.mjs --apply && npm run verify
-```
-
-I did not run it for you — you said copy the originals, and some people want lossless
-masters in the repo. But it is far cheaper to decide now, at one commit, than after the
-repo is pushed and the 80MB is permanently in history.
+`optimize-sources.mjs --apply` was run before the first push, per the open-items list.
+24 large PNGs became WebP q90 sources, 45.9MB → 4.0MB (`src/assets/` now 9.2MB total).
+Astro re-encodes at build time so delivered quality is unchanged. The untouched
+originals remain in `bhavanajoshi-rescue/`. `npm run verify` passes.
 
 ### Everything else
 
