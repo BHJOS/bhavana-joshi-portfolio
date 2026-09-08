@@ -3,10 +3,12 @@
 # Anonymized per Bhavana's decision 2026-08-31: the product and the nonprofit are
 # never named, on the page or in this file's visible output. Gated. Promoted
 # 2026-08-31 on Bhavana's approval, first in the work index ahead of Issuer,
-# IVA, and Arts Center. All screenshots captured 2026-08 from the live prototype
-# running locally, viewed before captioning. The skill-file image is a verbatim
-# excerpt of one of Bhavana's own component skill files rendered in an editor
-# style, with no identifying names in frame.
+# IVA, and Arts Center. Tightened 2026-09-08 to match the sibling studies
+# (991 body words to ~480, 13 images to 11, seven sections). All screenshots
+# captured 2026-08 from the live prototype running locally, viewed before
+# captioning. The skill-file image is a verbatim excerpt of one of Bhavana's own
+# component skill files rendered in an editor style, with no identifying names
+# in frame.
 title: 'Designing in Code with AI'
 client: 'A Health & Lifestyle App'
 year: 2026
@@ -33,9 +35,7 @@ import aiScanner from '../../assets/work/designing-in-code/ai-scanner.png';
 import aiScanResult from '../../assets/work/designing-in-code/ai-scan-result.webp';
 import sleepGauge from '../../assets/work/designing-in-code/sleep-gauge.webp';
 import bloodPressure from '../../assets/work/designing-in-code/blood-pressure.png';
-import heartRate from '../../assets/work/designing-in-code/heart-rate-summary.png';
 import captureDark from '../../assets/work/designing-in-code/capture-sheet-dark.webp';
-import plansToday from '../../assets/work/designing-in-code/plans-today.webp';
 
 <FullBleed
   src={heroThree}
@@ -55,71 +55,48 @@ import plansToday from '../../assets/work/designing-in-code/plans-today.webp';
 
 ## The static mockup stopped being enough.
 
-By the time my Figma library for this product had grown to several hundred
-high-fidelity explorations, the questions the team needed answered had outgrown
-what a picture of a screen can say. Does the capture flow still feel fast on the
-third log of the day? Does a gauge animation read at a glance or does it
-distract? What does a brand-new user see when every surface is empty? In early
-2026 I moved my design practice into code. Working with Claude Code, I design by
-describing intent, reviewing the running interface, and refining until the
-behavior is right. The prototype, not the mockup, became the thing the team
-gathers around.
+By the time my Figma library had grown to several hundred high-fidelity
+explorations, the questions the team was asking had outgrown what a picture of
+a screen can say. Does the capture flow still feel fast on the third log of the
+day? Does a gauge animation read at a glance or distract? What does a new user
+see when every surface is empty? In early 2026 I moved my practice into code,
+describing intent to Claude Code, reviewing the running interface, and refining
+until the behavior is right. The prototype, not the mockup, became what the
+team gathers around.
 
-## Context and my role
+## My role
 
 I am the Senior User Experience Designer on the flagship app of a health and
-lifestyle nonprofit, an all-in-one product for continuous personal improvement.
-It unifies health, habits, and goals through near-effortless data capture and
-AI-powered insights. I joined in November 2025, working on a 12-person product
-team and owning the Nutrition, Health, and Wellbeing surfaces. My remit runs
-from research and user flows through high-fidelity UI to a working React and
-TypeScript prototype that leadership, design, and engineering use to validate
-real product behavior before committing production work. I began the engagement
-in Figma and carried the strongest directions forward into code.
+lifestyle nonprofit, owning the Nutrition, Health, and Wellbeing surfaces on a
+12-person product team. My remit runs from research through high-fidelity UI to
+a working React and TypeScript prototype the team validates real behavior in. I
+started in Figma and carried the strongest directions into code.
 
-## A git-based design practice
+## I run design the way engineers run code.
 
-Designing in code only earns trust if it is disciplined, so I run my design work
-the way engineers run theirs. Every exploration lives in its own personal
-worktree, so ideas can be tried and discarded without touching anything the team
-relies on. Finished work goes up as a pull request the same day, and changes
-move through tiered promotion gates for design, quality, and development before
-they reach the main prototype. I also wrote Claude Code skill files for my core
-components, short documents that encode each component's anatomy, states, and
-rules, so every new screen built with AI assistance speaks the same design
-language. The result is a prototype the team can trust, built through more than
-170 commits across 350 plus files, with stakeholder review happening against
-working screens the same day a change is made.
+Designing in code only earns trust if it is disciplined. Every exploration lives
+in its own worktree. Finished work goes up as a pull request the same day and
+passes design, quality, and development gates before reaching the main
+prototype. I also wrote Claude Code skill files for my core components, short
+documents encoding each one's anatomy, states, and rules.
 
 <Figure
   src={skillFile}
   alt="A page of one of the component skill files shown in a code editor. Sections titled Daily Goal Constants, Over-Goal Red Rule, ProgressRing Component, and Calories Layout spell out goal values, the rule that over-goal numbers turn red, the ring component's props, and exact spacing and type sizes."
-  caption="Design decisions written as rules. Skill files encode each component's anatomy, states, and constraints so every AI-assisted screen speaks the same design language."
+  caption="Design decisions written as rules, so every AI-assisted screen speaks the same language."
 />
 
-## One capture experience for seven kinds of life data
+## One button for seven kinds of life data
 
-The app asks people to log almost everything about their day, and historically
-each kind of data had its own flow. Meals, workouts, symptoms, mood, and the
-rest were all captured differently, which meant seven behaviors to learn and
-seven places for friction to hide. I unified them into a single capture
-experience that opens from one button anywhere in the app. Every type shares the
-same browse grammar. Previously logged items surface first as one-tap chips,
-search works in place rather than on a separate screen, and anything new can be
-created from the same sheet. Staged items collect in a tray, where each opens a
-compact editor with the fields its type actually needs. A group of staged items
-can be submitted together and saved as a reusable meal, recipe, or workout. The
-flow shipped with full dark mode support and fresh-start empty states for new
-users.
-
-The design review was as important as the design. Before the build, I measured
-the four proposed directions against the governing spec and documented twenty
-gaps across interaction coverage, edge states, and accessibility. That review
-set the build order, and the shipped flow closes those gaps in the design
-system's own language rather than with one-off patches.
+Each kind of data used to have its own flow, which meant seven behaviors to
+learn and seven places for friction to hide. I unified them into one capture
+experience that opens from a single button anywhere in the app, with a shared
+grammar of one-tap chips, in-place search, a staging tray, and compact per-type
+editors. Before the build I measured the four proposed directions against the
+governing spec and documented twenty gaps. That review set the build order.
 
 <TwoUp
-  caption="One button, seven kinds of life data. Previously logged items surface first as one-tap chips, and search works in place rather than on a separate screen. Tapping a chip stages it, and the staged count collects beside the search bar, ready to review and submit together."
+  caption="Previously logged items surface first as chips, search works in place, and staged items collect beside the search bar to submit together."
   items={[
     {
       src: captureSheet,
@@ -135,24 +112,20 @@ system's own language rather than with one-off patches.
 <Figure
   src={diary}
   alt="The diary tab listing entries grouped by day. Saturday holds two journal entries with text snippets, a sixteen-minute evening meditation, and a vital reading. Friday holds two mood entries with ratings out of ten."
-  caption="Everything lands in one diary. Entries group by day, each carrying the fields its type actually needs."
+  caption="Everything lands in one diary, grouped by day."
 />
 
-## Designing the AI features
+## Designing for the wrong guess
 
-AI features in the app had to earn their place by removing effort, not by adding
-novelty. The clearest win is the meal photo scan. Point the camera at a plate,
-and the flow identifies the foods, prefills the diary entry, and asks the user
-to confirm instead of type. I designed and built this flow in the prototype, and
-it was adopted into the team's main product surface. Alongside it I designed an
-AI describe panel, where a person logs anything by saying it in their own words
-and then confirms what the AI understood, and a scanner flow that turns labels
-into structured entries. Designing these features meant designing for the
-moments the AI is wrong. Every flow shows its inference in plain language, and
-confirming or correcting it is a single tap.
+AI features had to earn their place by removing effort, not adding novelty. The
+clearest win, the meal photo scan, identifies the foods on a plate, prefills the
+entry, and asks for a confirmation instead of typing. I designed and built it in
+the prototype, and it was adopted into the team's main product surface. The real
+design work was the moment the AI is wrong. Every inference shows in plain
+language, and correcting it is one tap.
 
 <TwoUp
-  caption="From photo to confirmed entry. The scan identifies the plate, prefills amounts, calories, and macros, and marks every AI-estimated field, so correcting a wrong guess is one tap. This flow was adopted into the team's main product surface."
+  caption="From photo to confirmed entry. Every AI-estimated field is marked, so correcting a wrong guess is one tap."
   items={[
     {
       src: aiScanner,
@@ -165,20 +138,19 @@ confirming or correcting it is a single tap.
   ]}
 />
 
-## Clinical guidance made glanceable
+## Glanceable first, clinical underneath
 
-Health data is only useful if it can be read at a glance without being misread.
-For the Health and Wellbeing surfaces I designed gauge-style heroes for sleep,
-mood, heart, and blood sugar, each opening into a summary that tells the fuller
-story. For blood pressure I translated American Heart Association guidance into
-colored zone banding, so a reading lands visibly inside a clinically meaningful
-range instead of sitting beside an abstract number. The same principle carries
-into assistive technology. Every chart in the system exposes a plain-language
-text summary, so the glanceable version and the accessible version tell the same
-story.
+Health data is only useful if it reads at a glance without being misread. I
+designed gauge-style heroes for sleep, mood, heart, and blood sugar, and
+translated American Heart Association guidance into colored zone banding for
+blood pressure, so a reading lands inside a clinically meaningful range rather
+than beside an abstract number. The same rule runs through accessibility. Every
+chart exposes a plain-language summary, and my WCAG 2.2 patterns document
+records each pattern twice, as built and as its production equivalent, so
+engineering inherits decisions.
 
 <TwoUp
-  caption="Glanceable first, clinical underneath. The sleep gauge reads at arm's length with goal and quality beside the ring, and a blood pressure reading lands inside colored zones with a plain-language status instead of sitting beside an abstract number."
+  caption="The sleep gauge reads at arm's length, and a blood pressure reading lands in a banded range with a plain-language status."
   items={[
     {
       src: sleepGauge,
@@ -190,23 +162,6 @@ story.
     },
   ]}
 />
-
-<Figure
-  src={heartRate}
-  alt="The health surface with the heart rate hero. A resting reading of 71 bpm sits above a weekly line chart, and beneath the chart a sentence reads resting heart rate sits comfortably in a healthy range."
-  caption="Every chart tells its story in words too. The weekly line is paired with a plain-language summary, so the glanceable version and the screen-reader version agree."
-/>
-
-## Accessibility as system rules
-
-Accessibility in a prototype is easy to postpone and expensive to retrofit, so I
-made it part of the system's rules rather than a cleanup pass. I wrote and
-maintain the project's WCAG 2.2 patterns document. It covers minimum touch
-targets, contrast floors for secondary text, reduced-motion gating on every
-animation, accessible titles on every sheet, and text alternatives for every
-chart. Each pattern is recorded twice, once as implemented in the prototype and
-once as its production equivalent, so the engineering team inherits decisions
-instead of reverse-engineering them from prototype code.
 
 <TwoUp
   caption="The same sheet in light and dark. Contrast is a system rule, not a per-screen fix."
@@ -222,20 +177,11 @@ instead of reverse-engineering them from prototype code.
   ]}
 />
 
-## Results and where it stands
+## Results
 
-The prototype became the team's design source of truth. Leadership, design, and
-engineering validate real product behavior in it before committing production
-work, and stakeholder review happens against working screens rather than static
-frames. The AI meal photo scan flow was adopted into the team's main product
-surface. The accessibility patterns document carries every decision to the
-production team in their own terms. And the practice itself may be the most
-durable outcome. A designer's workflow of personal worktrees, same-day pull
-requests, and promotion gates lets design move at the speed of conversation
-while holding a quality line the whole team can see.
-
-<Figure
-  src={plansToday}
-  alt="The plans view for today. A goals and actions summary sits above hydration at 32 of 64 ounces, pushups at 75 of 100 reps, workouts at 2 of 3 sessions for the week, and collapsed rows for fitness, macros, and micros, with a meditation card below."
-  caption="Where the captured day ends up. The plans view rolls every log into goals and actions, each showing its progress toward today."
-/>
+The prototype is the team's design source of truth, the place the team
+validates real behavior before committing production work. The meal photo scan
+shipped into the main product surface. And the practice itself may be the most
+durable outcome, a workflow of worktrees, same-day pull requests, and promotion
+gates that lets design move at the speed of conversation while holding a
+quality line the whole team can see.
