@@ -24,6 +24,7 @@ order: 1
 import FullBleed from '../../components/mdx/FullBleed.astro';
 import Figure from '../../components/mdx/Figure.astro';
 import TwoUp from '../../components/mdx/TwoUp.astro';
+import Gallery from '../../components/mdx/Gallery.astro';
 import Stats from '../../components/mdx/Stats.astro';
 
 import heroThree from '../../assets/work/designing-in-code/hero-three-frames.webp';
@@ -32,6 +33,7 @@ import captureSheet from '../../assets/work/designing-in-code/capture-sheet.webp
 import captureStaged from '../../assets/work/designing-in-code/capture-sheet-staged.webp';
 import diary from '../../assets/work/designing-in-code/diary.webp';
 import aiScanner from '../../assets/work/designing-in-code/ai-scanner.png';
+import aiMealScan from '../../assets/work/designing-in-code/ai-meal-scan.webp';
 import aiScanResult from '../../assets/work/designing-in-code/ai-scan-result.webp';
 import sleepGauge from '../../assets/work/designing-in-code/sleep-gauge.webp';
 import bloodPressure from '../../assets/work/designing-in-code/blood-pressure.png';
@@ -124,12 +126,17 @@ the prototype, and it was adopted into the team's main product surface. The real
 design work was the moment the AI is wrong. Every inference shows in plain
 language, and correcting it is one tap.
 
-<TwoUp
+<Gallery
+  columns={3}
   caption="From photo to confirmed entry. Every AI-estimated field is marked, so correcting a wrong guess is one tap."
   items={[
     {
       src: aiScanner,
       alt: 'The AI scanner in the prototype. A camera view with corner guides, a segmented control for meal, barcode, and food label modes, and flash, shutter, and photo library controls.',
+    },
+    {
+      src: aiMealScan,
+      alt: 'The scanner mid-analysis, shown in a phone frame. A photo of scrambled eggs with herbs on a white plate sits dimmed behind a sparkle icon, the word analyzing, a line reading AI is identifying the item and its nutrition, and a progress bar, with the meal, barcode, and food label modes below.',
     },
     {
       src: aiScanResult,
