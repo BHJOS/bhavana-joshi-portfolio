@@ -35,7 +35,13 @@ Minimal black-and-white editorial.
 - One sanctioned tint: the footer background `--color-footer: #e0e0db`, carried over
   from the Squarespace site's footer (its lightAccent, hsl(60 7.46% 86.86%)). Nothing
   else gets a tint.
-- **No** gradients. **No** drop shadows. **No** rounded-corner cards. **No** decorative color.
+- **No** gradients. **No** drop shadows. **No** rounded-corner cards or panels.
+  **No** decorative color. The one exception is the Work index (`/work`), where the
+  card thumbnails carry a 16px radius (`rounded-2xl`, the `rounded` prop on
+  `WorkCard`) with the hairline border (Bhavana, 2026-09-15). Everywhere else,
+  including the homepage grid, case-study figures, and the portrait, image frames
+  stay square-edged. Images in a row (TwoUp, Gallery, BeforeAfter, work cards) share
+  one frame ratio and sit centered inside it with `object-contain`, never cropped.
 - Rules/borders are hairline (`1px`) and near-black or a light gray — never mid-gray mush.
 
 ### The work is the color.

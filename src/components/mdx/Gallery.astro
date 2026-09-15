@@ -20,6 +20,10 @@ interface Props {
 
 const { items, columns = 3, caption } = Astro.props;
 
+// One frame size for the whole set: the tallest image's ratio. Wider images sit
+// centered inside it with their full content intact rather than being cropped.
+const ratio = Math.min(...items.map((it) => it.src.width / it.src.height));
+
 for (const [i, it] of items.entries()) {
   if (!it.altTodo && it.alt === undefined) {
     throw new Error(`Gallery: item ${i} needs \`alt\` or \`altTodo\`. Never invent alt text.`);
@@ -47,16 +51,18 @@ const sizesHint = {
       <li>
         <figure>
           {it.altTodo && <Fragment set:html="<!-- TODO(alt): needs alt text from Bhavana -->" />}
-          <Image
-            src={it.src}
-            alt={it.altTodo ? '' : it.alt!}
-            width={widthHint}
-            densities={[1, 2]}
-            loading="lazy"
-            decoding="async"
-            sizes={sizesHint}
-            class="w-full border border-rule"
-          />
+          <div class="overflow-hidden border border-rule" style={`aspect-ratio: ${ratio}`}>
+            <Image
+              src={it.src}
+              alt={it.altTodo ? '' : it.alt!}
+              width={widthHint}
+              densities={[1, 2]}
+              loading="lazy"
+              decoding="async"
+              sizes={sizesHint}
+              class="h-full w-full object-contain"
+            />
+          </div>
           {it.caption && (
             <figcaption class="mt-3 text-meta text-ink-muted normal-case tracking-normal">
               {it.caption}

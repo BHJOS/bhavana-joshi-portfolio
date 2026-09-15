@@ -26,6 +26,10 @@ for (const [i, it] of items.entries()) {
 }
 
 const Wrapper = caption ? 'figure' : 'div';
+
+// Both frames share the tallest image's ratio; a wider image sits centered inside
+// with its full content intact rather than being cropped.
+const ratio = Math.min(...items.map((it) => it.src.width / it.src.height));
 ---
 
 <Wrapper class="my-12">
@@ -34,16 +38,18 @@ const Wrapper = caption ? 'figure' : 'div';
     items.map((it) => (
       <figure>
         {it.altTodo && <Fragment set:html="<!-- TODO(alt): needs alt text from Bhavana -->" />}
-        <Image
-          src={it.src}
-          alt={it.altTodo ? '' : it.alt!}
-          width={900}
-          densities={[1, 2]}
-          loading="lazy"
-          decoding="async"
-          sizes="(min-width: 640px) 540px, 100vw"
-          class="w-full border border-rule"
-        />
+        <div class="overflow-hidden border border-rule" style={`aspect-ratio: ${ratio}`}>
+          <Image
+            src={it.src}
+            alt={it.altTodo ? '' : it.alt!}
+            width={900}
+            densities={[1, 2]}
+            loading="lazy"
+            decoding="async"
+            sizes="(min-width: 640px) 540px, 100vw"
+            class="h-full w-full object-contain"
+          />
+        </div>
         {it.caption && (
           <figcaption class="mt-3 text-meta text-ink-muted normal-case tracking-normal">
             {it.caption}

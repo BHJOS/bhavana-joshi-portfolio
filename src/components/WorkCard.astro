@@ -11,9 +11,17 @@ interface Props {
   /** 'dark' when the card sits on a black section (homepage). Text flips to paper.
       paper/60 on black is ~5.9:1, an AA pass for the 13px meta lines. */
   tone?: 'light' | 'dark';
+  /** 16px corner radius on the thumbnail frame. Only the Work index uses it (Bhavana, 2026-09-15). */
+  rounded?: boolean;
 }
 
-const { entry, loading = 'lazy', headingLevel: Heading = 'h3', tone = 'light' } = Astro.props;
+const {
+  entry,
+  loading = 'lazy',
+  headingLevel: Heading = 'h3',
+  tone = 'light',
+  rounded = false,
+} = Astro.props;
 const { title, client, year, tags, hero, heroAlt, heroAltTodo, gated } = entry.data;
 
 // A flagged image renders silent rather than announcing a placeholder string.
@@ -27,19 +35,25 @@ const strongClass = dark ? 'text-paper' : 'text-ink';
 
 <article class="group">
   <a href={`/work/${entry.id}`} class="block no-underline">
-    <Image
-      src={hero}
-      alt={alt}
-      width={800}
-      densities={[1, 2]}
-      loading={loading}
-      decoding="async"
-      sizes="(min-width: 768px) 520px, 100vw"
+    <div
       class:list={[
-        'w-full border transition-opacity group-hover:opacity-85',
+        'overflow-hidden border transition-opacity group-hover:opacity-85',
+        rounded && 'rounded-2xl',
         dark ? 'border-paper/20' : 'border-rule',
       ]}
-    />
+      style="aspect-ratio: 3 / 2"
+    >
+      <Image
+        src={hero}
+        alt={alt}
+        width={800}
+        densities={[1, 2]}
+        loading={loading}
+        decoding="async"
+        sizes="(min-width: 768px) 520px, 100vw"
+        class="h-full w-full object-cover"
+      />
+    </div>
 
     <div class="mt-5">
       <p class:list={['text-meta uppercase', metaClass]}>

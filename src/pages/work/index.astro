@@ -23,7 +23,7 @@ const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
     <div class="grid grid-cols-1 gap-x-10 gap-y-16 md:grid-cols-2">
       {
         work.map((entry, i) => (
-          <WorkCard entry={entry} headingLevel="h2" loading={i < 2 ? 'eager' : 'lazy'} />
+          <WorkCard entry={entry} headingLevel="h2" loading={i < 2 ? 'eager' : 'lazy'} rounded />
         ))
       }
     </div>
