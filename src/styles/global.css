@@ -174,11 +174,12 @@
 @layer components {
   .prose-case > h2:not([class]) {
     margin-top: 5rem;
-    font-size: var(--text-h1);
-    line-height: var(--text-h1--line-height);
-    letter-spacing: var(--text-h1--letter-spacing);
-    /* 500, not the h1 token's 700 — Bhavana's call (2026-08): section heads
-       read editorial at 44px; the page h1 and stat values keep the heavy 700. */
+    /* The h2 token (32px) — Bhavana's call (2026-09-15), down from the 44px h1
+       size. Weight stays 500 (her 2026-08 call); the page h1 and the stat
+       values keep the heavy 700. */
+    font-size: var(--text-h2);
+    line-height: var(--text-h2--line-height);
+    letter-spacing: var(--text-h2--letter-spacing);
     font-weight: 500;
   }
 
