@@ -36,7 +36,7 @@ import aiScanner from '../../assets/work/designing-in-code/ai-scanner.png';
 import aiMealScan from '../../assets/work/designing-in-code/ai-meal-scan.webp';
 import aiScanResult from '../../assets/work/designing-in-code/ai-scan-result.webp';
 import sleepGauge from '../../assets/work/designing-in-code/sleep-gauge.webp';
-import bloodPressure from '../../assets/work/designing-in-code/blood-pressure.png';
+import bloodSugar from '../../assets/work/designing-in-code/blood-sugar.png';
 import captureDark from '../../assets/work/designing-in-code/capture-sheet-dark.webp';
 
 <FullBleed
@@ -149,23 +149,24 @@ language, and correcting it is one tap.
 
 Health data is only useful if it reads at a glance without being misread. I
 designed gauge-style heroes for sleep, mood, heart, and blood sugar, and
-translated American Heart Association guidance into colored zone banding for
-blood pressure, so a reading lands inside a clinically meaningful range rather
-than beside an abstract number. The same rule runs through accessibility. Every
+translated clinical guidance into colored zone banding, American Diabetes
+Association ranges for blood sugar and American Heart Association ranges for
+blood pressure, so a reading lands inside a meaningful range rather than beside
+an abstract number. The same rule runs through accessibility. Every
 chart exposes a plain-language summary, and my WCAG 2.2 patterns document
 records each pattern twice, as built and as its production equivalent, so
 engineering inherits decisions.
 
 <TwoUp
-  caption="The sleep gauge reads at arm's length, and a blood pressure reading lands in a banded range with a plain-language status."
+  caption="The sleep gauge reads at arm's length, and blood sugar lands in banded ranges built from American Diabetes Association guidelines, before and after a meal."
   items={[
     {
       src: sleepGauge,
       alt: 'The wellbeing surface with the sleep gauge active. A large ring reads 7h 22m against an 8h goal with a quality score of 82, above segments for mood, stress, and journal.',
     },
     {
-      src: bloodPressure,
-      alt: 'The blood pressure summary sheet. A reading of 123 over 79 carries an elevated status chip, and the day chart places systolic and diastolic dots inside shaded amber and green zones, with minimum, average, and maximum values below.',
+      src: bloodSugar,
+      alt: 'The blood sugar summary sheet. Twin half-circle gauges read 92 mg/dL in range before a meal and 148 mg/dL elevated after, above bars banded normal, prediabetes, and diabetic with each reading marked and a note that ADA guidelines call under 100 and under 140 normal. Contributing metrics list fasting, post-meal, estimated HbA1c, and variability.',
     },
   ]}
 />
