@@ -1,0 +1,191 @@
+---
+# Second IVA study, built 2026-09-15 from the Squarespace page
+# /interactive-visual-aid-pp, captured to ../bhavanajoshi-rescue-pp/ once Bhavana
+# lifted its password. Positioned per Bhavana as the full implementation of the
+# Future State IVA guidelines on one build. Results-first, 14 images (page had
+# 33), every one viewed before its caption and alt text were written. Hidden
+# draft until Bhavana approves promotion. Gated, like the IVA study.
+title: 'Interactive Patient Profile Tool'
+client: 'Bristol Myers Squibb'
+year: 2021
+role: 'Product Design, UX, UI, User Testing, Storyboarding'
+summary: 'A white-paper sales aid rebuilt as an Interactive Visual Aid on the Future State template. Three linked presentations, four patient profiles, and medical-legal flow built in, delivered under the original timeline and budget.'
+tags: ['product design', 'design systems', 'pharma']
+hero: '../../assets/work/patient-profile-tool/ipad-home-slide.webp'
+heroAlt: 'An iPad running the POMALYST Interactive Patient Profile Tool home slide. The brand logo and indication sit under a teal and yellow swoosh, with the menu, zoom, and briefcase buttons on the left and the Important Safety Information tray docked below.'
+gated: true
+draft: true
+order: 4
+---
+
+import FullBleed from '../../components/mdx/FullBleed.astro';
+import Figure from '../../components/mdx/Figure.astro';
+import TwoUp from '../../components/mdx/TwoUp.astro';
+import BeforeAfter from '../../components/mdx/BeforeAfter.astro';
+import Gallery from '../../components/mdx/Gallery.astro';
+import Stats from '../../components/mdx/Stats.astro';
+
+import banner from '../../assets/work/patient-profile-tool/banner-home-slide.webp';
+import sitemapDraft from '../../assets/work/patient-profile-tool/sitemap-draft.png';
+import sitemapFinal from '../../assets/work/patient-profile-tool/sitemap-final.png';
+import wireOriginal from '../../assets/work/patient-profile-tool/wireframe-original-concept.webp';
+import wireTemplate from '../../assets/work/patient-profile-tool/wireframe-future-state-template.png';
+import styleColors from '../../assets/work/patient-profile-tool/style-guide-colors.png';
+import clmThumbs from '../../assets/work/patient-profile-tool/clm-thumbnails.webp';
+import screenOverview from '../../assets/work/patient-profile-tool/screen-patients-overview.webp';
+import screenProfile from '../../assets/work/patient-profile-tool/screen-patient-profile.webp';
+import screenOptions from '../../assets/work/patient-profile-tool/screen-treatment-options.webp';
+import forcedFlow from '../../assets/work/patient-profile-tool/forced-flow-nav-disabled.webp';
+import profileButton from '../../assets/work/patient-profile-tool/profile-button-added.webp';
+import storyboard from '../../assets/work/patient-profile-tool/storyboard-page-22.webp';
+
+<FullBleed
+  src={banner}
+  alt="The top of an iPad showing the POMALYST Interactive Visual Aid home slide, the brand logo and dosing strengths under a teal and yellow swoosh, against a wider band of the same teal."
+  caption="The first IVA built end to end on the Future State guidelines. The template did the structural work, so the build could concentrate on the story."
+  loading="eager"
+/>
+
+<Stats
+  items={[
+    { value: '1 into 3', label: 'one draft deck reconfigured into three linked presentations that read as one' },
+    { value: '4', label: 'hypothetical patient profiles, each opening the treatment path that fits' },
+    { value: '3', label: 'POMALYST regimens, color coded so a rep never loses the thread' },
+    { value: 'Reduced', label: 'timeline and budget against the original plan, with simpler back-end integration' },
+  ]}
+/>
+
+## A white paper is not a conversation.
+
+The brief was to turn a white-paper sales aid into an Interactive Visual Aid that lets a
+hematology consultant choose a patient and follow the regimen that fits, a choose your own
+adventure across four hypothetical patients and the three approved POMALYST combinations.
+It also had to be the proof that the new [Future State IVA](/work/interactive-visual-aids)
+guidelines worked in practice, built lean on the global template rather than as another
+bespoke deck. The first draft sitemap made the risk plain. It repeated the full treatment
+section under every one of the four patients, four copies of the same slides, each one
+adding development time, load time, and medical-legal review.
+
+## My role
+
+Product design, UX and UI, user testing, and storyboarding, on the first build to apply the
+Future State guidelines from sitemap to sales floor. I redesigned the architecture,
+tailored the content to the global templates, wrote the brand style guide for the build,
+and ran QA with the in-house team through every round of iteration.
+
+## Three presentations that feel like one
+
+I split the deck into three. The main presentation holds Home, the four patient selector,
+the individual profiles, dosing, and references. The Pd regimen became a separate hidden
+presentation that the home slide links into, and the two combination regimens became a
+third. Links between the three are seamless, so on the surface the rep sees one document,
+while underneath every slide exists exactly once.
+
+<BeforeAfter
+  beforeLabel="Draft sitemap"
+  afterLabel="Reconfigured sitemap"
+  before={{
+    src: sitemapDraft,
+    alt: 'Version 15 of the draft sitemap for the POMALYST patient profile tool. Four patient cases run across the top, and under each one the same treatment option branches repeat, DPd and EPd trial design, efficacy, safety, and dosing. Three of the repeated columns and the row of more about patient slides are circled in red.',
+    caption: 'The same treatment slides duplicated under every patient. Circled in red, the redundancy that would have bloated the build.',
+  }}
+  after={{
+    src: sitemapFinal,
+    alt: 'The final sitemap. A main presentation runs from POM Home, marked forced flow, through a four patient selector, the four profiles, oral dosing, and references. A boxed Pd section sits to the left as forced content in its own presentation, and a treatment options presentation below holds the DPd and EPd slides once, with a note that the Profile button returns the user to the patient that started the exploration.',
+    caption: 'One main deck, a hidden Pd deck, and one treatment options deck. Every slide once, linked so the rep never notices the seams.',
+  }}
+/>
+
+## The guidelines, applied
+
+The original concept had been drawn as a generic tablet layout. I redrew it on the Future
+State template, keeping the global navigation, the docked safety information, and the side
+rail the system already defined, so the content fit the template rather than the template
+bending to the content. A brand style guide fixed the palette, type, buttons, callouts, and
+icons before development began, and gave each regimen its own color so a rep always knows
+which therapy a slide belongs to.
+
+<TwoUp
+  caption="The original concept beside the same slide redrawn on the Future State template, with the global navigation, docked safety tray, and profile tabs the system already defined."
+  items={[
+    {
+      src: wireOriginal,
+      alt: 'An early gray wireframe of a patient treatment slide. A left rail with PI and ISI buttons, a patient avatar and placeholder title, two columns comparing the DPd and EPd treatments with choose this treatment buttons, and safety information along the bottom.',
+    },
+    {
+      src: wireTemplate,
+      alt: 'The overview slide wireframed on the Future State template. A black header band with patient profile and path based on answers tabs, menu, zoom, and briefcase buttons on the left, four gray patient placeholders across the middle, and the Important Safety Information tray with a Full Prescribing Information button docked at the bottom.',
+    },
+  ]}
+/>
+
+<TwoUp
+  caption="The style guide gives each regimen its color, orange for EPd and green for DPd. The delivery view shows only the main deck, with the treatment decks hidden until a patient is chosen."
+  items={[
+    {
+      src: styleColors,
+      alt: 'The Colors and Fonts page of the POMALYST IVA brand style guide. Primary dark teal, secondary light green, and tertiary yellow swatches with Pantone, RGB, and hex values, with a note that EPd content is differentiated by orange and DPd content by light green, and rows for text color, side rail, and off states.',
+    },
+    {
+      src: clmThumbs,
+      alt: 'The tablet presentation library showing the POMALYST Interactive Patient Profile Tool with eight thumbnails, Home, 4 Patients Selector, Samantha, John, Mark, Amy, Oral Dosing, and References. No treatment option slides appear.',
+    },
+  ]}
+/>
+
+<Gallery
+  columns={3}
+  caption="Pick a patient, read the profile with its key considerations, then choose a regimen, each button in the color the style guide gave that therapy."
+  items={[
+    {
+      src: screenOverview,
+      alt: 'The Patients Overview slide. Four circular portraits labeled Samantha 59, John 74, Mark 71, and Amy 69, each with bullet points on relapse type, prior therapy, performance status, and cytogenetic risk, above the docked safety information tray.',
+    },
+    {
+      src: screenProfile,
+      alt: "Samantha's patient profile slide. Her portrait beside type of relapse, previous treatments, and lines of therapy, patient history and clinical presentation columns below, a key considerations rail on the right, and the safety information tray with a boxed warning at the bottom.",
+    },
+    {
+      src: screenOptions,
+      alt: 'The treatment options slide for Samantha. Her summary and key considerations above a question asking which regimen to explore, with three buttons, Pd doublet in teal, DPd triplet in green, and EPd triplet in orange, and the indications rail on the right.',
+    },
+  ]}
+/>
+
+## Compliance as navigation
+
+Medical-legal required that a rep share the Pd data before anything else, so swiping from
+the home slide leads into the Pd section with the three global navigation buttons disabled,
+and the only way through is forward. Reached later from the treatment options slide, the
+same section shows a new Profile button, added to the global navigation so the rep can
+return to the patient they started with and switch to another. The in-house QA team and I
+tested every iteration, and the storyboard carried each of these behaviors to the client
+and to the field as a rehearsal script.
+
+<TwoUp
+  caption="Entered from the home slide, the Pd section runs with menu, zoom, and briefcase grayed out and no way but forward. Entered from treatment options, it gains the circled Profile button to switch patients."
+  items={[
+    {
+      src: forcedFlow,
+      alt: 'The Pd trial design slide with the menu, zoom, and briefcase buttons on the left grayed out. A donut chart shows 94 percent refractory to REVLIMID, with trial design notes in the right rail and the safety tray below.',
+    },
+    {
+      src: profileButton,
+      alt: 'The same Pd trial design slide with a fourth button labeled profile added below the global navigation and circled in red.',
+    },
+  ]}
+/>
+
+<Figure
+  src={storyboard}
+  alt="Page 22 of 83 in the storyboard. The treatment options slide for Samantha with a callout A on a flyout of three prescribing information tabs, POMALYST, EMPLICITI, and REVLIMID, and a navigation note explaining that the flyout appears when more than one brand PI is needed. The presentation name, content map reference, and section name are listed on the right."
+  caption="The storyboard as the approval document. Every custom behavior is drawn, lettered, and explained on the page the client and the reps rehearse from."
+/>
+
+## Results
+
+Reconfiguring the plan cut the timeline and the budget below the original estimate and
+simplified the back-end integration. The field reps came back positive. And the build did
+what it was commissioned to prove. A brand could take the Future State guidelines, from
+template to style guide to storyboard, and ship a complex, regulated story as one lean
+product without inventing anything new.
