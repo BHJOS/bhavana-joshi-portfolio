@@ -22,7 +22,8 @@ export default defineConfig({
   // This drives canonical URLs, absolute og:image paths, and sitemap.xml entries.
   site: 'https://www.bhavanajoshi.com',
 
-  // Cloudflare Pages serves the `dist/` folder directly. No adapter — see CLAUDE.md.
+  // Cloudflare serves the `dist/` folder directly (Workers static assets, wrangler.jsonc).
+  // No adapter — see CLAUDE.md.
   output: 'static',
 
   integrations: [

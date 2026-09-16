@@ -1,0 +1,15 @@
+// Cloudflare Workers static assets config. The Worker has no code of its own, it only
+// serves the Astro build in dist/. No adapter is involved, output stays `static`.
+// Added 2026-09-16 when Cloudflare stopped offering Pages for new Git projects.
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+  "name": "bhavana-joshi-portfolio",
+  "compatibility_date": "2026-09-16",
+  "assets": {
+    "directory": "./dist",
+    // Astro writes /work/index.html style folders, so /work and /work/ both resolve.
+    "html_handling": "auto-trailing-slash",
+    // Serve Astro's dist/404.html for unknown paths instead of a bare 404.
+    "not_found_handling": "404-page"
+  }
+}

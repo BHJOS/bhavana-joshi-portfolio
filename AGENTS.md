@@ -1,7 +1,7 @@
 # Bhavana Joshi — Design to Delivery
 
 Portfolio site for Bhavana Joshi, product designer. Replaces the Squarespace site at
-`www.bhavanajoshi.com`. Static Astro, deployed to Cloudflare Pages.
+`www.bhavanajoshi.com`. Static Astro, deployed to Cloudflare (Workers static assets).
 
 > `CLAUDE.md` is a symlink to this file. Editing either edits both.
 
@@ -18,8 +18,8 @@ Portfolio site for Bhavana Joshi, product designer. Replaces the Squarespace sit
 | Content      | Astro Content Collections — markdown / MDX, one file per project.      |
 | Images       | Astro `<Image>` / `<Picture>` only. WebP + AVIF, srcset, lazy below fold. |
 | Integrations | `@astrojs/mdx`, `@astrojs/sitemap`. Nothing else without asking.       |
-| Output       | `static`. Cloudflare Pages needs no adapter — do not add one.          |
-| Hosting      | Cloudflare Pages only. No Vercel/Netlify/Node config.                  |
+| Output       | `static`. Cloudflare serves `dist/` as-is — no adapter, do not add one. |
+| Hosting      | Cloudflare Workers static assets, via `wrangler.jsonc` (assets-only, no Worker code). Cloudflare stopped offering Pages for new Git projects by 2026-09-16, so the Worker replaces the planned Pages project. No Vercel/Netlify/Node config. |
 
 **Never** add a hosting adapter, a CSS framework beyond Tailwind, an icon library, or an
 animation library. If something seems to need one, ask first.
