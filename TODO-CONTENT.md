@@ -8,9 +8,10 @@ no placeholder text remains anywhere on the site.
 
 ---
 
-## 1. Alt text — 84 images need it
+## 1. Alt text — complete as of 2026-09-16
 
-**This is the only thing blocking an accessible launch.**
+**Nothing blocks an accessible launch.** The portrait on /about was the last gap and now
+carries Bhavana's own wording. `npm run audit:alt` reports zero flagged images.
 
 The Squarespace site had almost no alt text: the rescue `REPORT.txt` records 24 of 26
 missing on West Windsor, 36 of 38 on Interactive Visual Aid, 23 of 37 on Issuer Online.
@@ -31,11 +32,8 @@ Current count:
 | `src/content/work/interactive-visual-aids.mdx` | 0 — done in the 2026-08-25 redraft |
 | `src/content/work/issuer-online.mdx` | 0 — done in the 2026-08-25 redraft |
 | `src/content/work/west-windsor-arts-center.mdx` | 0 — done in the 2026-08-25 redraft |
-| `src/pages/about.astro` (your portrait) | 1 |
-| **Total** | **1** |
-
-The only remaining alt-text gap on the whole site is **your portrait on /about** — one
-sentence from you and the site is fully described.
+| `src/pages/about.astro` (your portrait) | 0 — supplied 2026-09-16 |
+| **Total** | **0** |
 
 **How to fill one in.** In the MDX, replace `altTodo` with real text:
 
