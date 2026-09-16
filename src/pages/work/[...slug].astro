@@ -2,9 +2,11 @@
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { isBuilt, isListed } from '../../consts';
 
 export const getStaticPaths = (async () => {
-  const work = await getCollection('work');
+  // With HIDE_GATED set, gated studies get no page at all (see consts.ts).
+  const work = await getCollection('work', ({ data }) => isBuilt(data));
   return work.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }) satisfies GetStaticPaths;
 
@@ -14,7 +16,7 @@ const { Content } = await render(entry);
 
 // Ordered siblings, for prev/next at the foot of the study. Drafts are reachable
 // by direct URL but never linked from published pages.
-const all = (await getCollection('work', ({ data }) => !data.draft)).sort(
+const all = (await getCollection('work', ({ data }) => isListed(data))).sort(
   (a, b) => a.data.order - b.data.order
 );
 // A draft is not in `all`, so findIndex returns -1 — and all[idx + 1] would then

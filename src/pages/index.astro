@@ -3,9 +3,9 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import LogoTicker from '../components/LogoTicker.astro';
-import { SITE_TAGLINE, EMAIL, LINKEDIN, CLIENTS } from '../consts';
+import { SITE_TAGLINE, EMAIL, LINKEDIN, CLIENTS, isListed } from '../consts';
 
-const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
+const work = (await getCollection('work', ({ data }) => isListed(data))).sort(
   (a, b) => a.data.order - b.data.order
 );
 

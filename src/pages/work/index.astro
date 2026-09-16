@@ -2,8 +2,9 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import WorkCard from '../../components/WorkCard.astro';
+import { isListed } from '../../consts';
 
-const work = (await getCollection('work', ({ data }) => !data.draft)).sort(
+const work = (await getCollection('work', ({ data }) => isListed(data))).sort(
   (a, b) => a.data.order - b.data.order
 );
 ---
