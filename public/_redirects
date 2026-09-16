@@ -8,9 +8,10 @@
 /interactive-visual-aid      /work/interactive-visual-aids    301
 
 # Password-protected variants that existed on Squarespace (captured as 401s in the
-# rescue). Same destination — the new site gates via Cloudflare Access instead.
+# rescue). The new site gates via Cloudflare Access instead. The -pp page held the
+# Pomalyst patient profile content, now its own unlisted study (Bhavana, 2026-09-16).
 /interactive-visual-aid-1-1  /work/interactive-visual-aids    301
-/interactive-visual-aid-pp   /work/interactive-visual-aids    301
+/interactive-visual-aid-pp   /work/patient-profile-tool       301
 
 # --- Index pages --------------------------------------------------------------
 /case-studies                /work                            301
