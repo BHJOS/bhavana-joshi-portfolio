@@ -23,6 +23,12 @@ interface Props {
   loading?: 'lazy' | 'eager';
   class?: string;
   sizes?: string;
+  /**
+   * Drop the hairline frame. For artwork that already sits on white (logo sheets,
+   * color and type specimens), where the rule reads as a box around nothing
+   * (Bhavana, 2026-09-18). Photos and UI screenshots keep the frame.
+   */
+  borderless?: boolean;
 }
 
 const {
@@ -34,6 +40,7 @@ const {
   loading = 'lazy',
   class: className = '',
   sizes = '(min-width: 1100px) 1100px, 100vw',
+  borderless = false,
 } = Astro.props;
 
 if (!altTodo && alt === undefined) {
@@ -56,7 +63,7 @@ const resolvedAlt = altTodo ? '' : alt!;
     loading={loading}
     decoding="async"
     sizes={sizes}
-    class="w-full border border-rule"
+    class={borderless ? 'w-full' : 'w-full border border-rule'}
   />
   {
     caption && (

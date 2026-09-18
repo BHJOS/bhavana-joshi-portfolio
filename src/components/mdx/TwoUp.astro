@@ -32,9 +32,15 @@ interface Props {
   /** One caption for the pair as a whole — e.g. a decision both images evidence.
       Composable with per-item captions. */
   caption?: string;
+  /**
+   * Drop the hairline frames. For artwork that already sits on white (color and type
+   * specimens), where the rule reads as a box around nothing (Bhavana, 2026-09-18).
+   */
+  borderless?: boolean;
 }
 
-const { items, caption } = Astro.props;
+const { items, caption, borderless = false } = Astro.props;
+const frameClass = borderless ? 'overflow-hidden' : 'overflow-hidden border border-rule';
 
 for (const [i, it] of items.entries()) {
   for (const img of [it, it.below]) {
@@ -82,7 +88,7 @@ const ratio = Math.min(...(framed.length ? framed : items).map((it) => it.src.wi
     ) : (
       <figure>
         {it.altTodo && <Fragment set:html="<!-- TODO(alt): needs alt text from Bhavana -->" />}
-        <div class="overflow-hidden border border-rule" style={`aspect-ratio: ${ratio}`}>
+        <div class={frameClass} style={`aspect-ratio: ${ratio}`}>
           <Image
             src={it.src}
             alt={it.altTodo ? '' : it.alt!}
