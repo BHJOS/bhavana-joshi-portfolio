@@ -8,6 +8,14 @@ interface ItemProps {
   alt?: string;
   altTodo?: boolean;
   caption?: string;
+  /**
+   * A second photo stacked under this one in the same column. The two frames split
+   * the height of the other column between them and fill edge to edge (cropped), so
+   * a pair of landscape photos can sit beside one portrait with no empty bands.
+   * Photographs only, never UI screenshots. Skip per-item captions when using this,
+   * they would throw the two columns out of line (Bhavana, 2026-09-18).
+   */
+  below?: Omit<ItemProps, 'below'>;
 }
 
 interface Props {
@@ -20,8 +28,10 @@ interface Props {
 const { items, caption } = Astro.props;
 
 for (const [i, it] of items.entries()) {
-  if (!it.altTodo && it.alt === undefined) {
-    throw new Error(`TwoUp: item ${i} needs \`alt\` or \`altTodo\`. Never invent alt text.`);
+  for (const img of [it, it.below]) {
+    if (img && !img.altTodo && img.alt === undefined) {
+      throw new Error(`TwoUp: item ${i} needs \`alt\` or \`altTodo\`. Never invent alt text.`);
+    }
   }
 }
 
@@ -29,13 +39,33 @@ const Wrapper = caption ? 'figure' : 'div';
 
 // Both frames share the tallest image's ratio; a wider image sits centered inside
 // with its full content intact rather than being cropped.
-const ratio = Math.min(...items.map((it) => it.src.width / it.src.height));
+// A stacked column takes its height from the other column, so it sits out of this.
+const framed = items.filter((it) => !it.below);
+const ratio = Math.min(...(framed.length ? framed : items).map((it) => it.src.width / it.src.height));
 ---
 
 <Wrapper class="my-12">
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
   {
-    items.map((it) => (
+    items.map((it) => it.below ? (
+      <div class="flex flex-col gap-6">
+        {[it, it.below].map((img) => (
+          <figure class="relative aspect-[3/2] overflow-hidden border border-rule sm:aspect-auto sm:min-h-0 sm:flex-1">
+            {img.altTodo && <Fragment set:html="<!-- TODO(alt): needs alt text from Bhavana -->" />}
+            <Image
+              src={img.src}
+              alt={img.altTodo ? '' : img.alt!}
+              width={900}
+              densities={[1, 2]}
+              loading="lazy"
+              decoding="async"
+              sizes="(min-width: 640px) 540px, 100vw"
+              class="absolute inset-0 h-full w-full object-cover"
+            />
+          </figure>
+        ))}
+      </div>
+    ) : (
       <figure>
         {it.altTodo && <Fragment set:html="<!-- TODO(alt): needs alt text from Bhavana -->" />}
         <div class="overflow-hidden border border-rule" style={`aspect-ratio: ${ratio}`}>
