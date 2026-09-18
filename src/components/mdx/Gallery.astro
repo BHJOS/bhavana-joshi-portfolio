@@ -8,6 +8,11 @@ interface Item {
   alt?: string;
   altTodo?: boolean;
   caption?: string;
+  /**
+   * With fit="cover", which part of the photo stays in frame, as a CSS
+   * object-position value such as 'right' or '80% 50%'. Defaults to center.
+   */
+  position?: string;
 }
 
 interface Props {
@@ -68,6 +73,7 @@ const sizesHint = {
               decoding="async"
               sizes={sizesHint}
               class={`h-full w-full ${fitClass}`}
+              style={it.position ? `object-position: ${it.position}` : undefined}
             />
           </div>
           {it.caption && (
