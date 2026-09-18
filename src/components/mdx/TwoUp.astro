@@ -16,6 +16,15 @@ interface ItemProps {
    * they would throw the two columns out of line (Bhavana, 2026-09-18).
    */
   below?: Omit<ItemProps, 'below'>;
+  /**
+   * Stacked photos only. `zoom` enlarges the photo inside its frame (1.2 = 20% larger)
+   * to crop out a distracting edge. `position` is the CSS object-position that picks
+   * which part survives the fill crop, and `origin` is the CSS transform-origin the
+   * zoom grows from. All default to centered and unzoomed.
+   */
+  zoom?: number;
+  position?: string;
+  origin?: string;
 }
 
 interface Props {
@@ -61,6 +70,11 @@ const ratio = Math.min(...(framed.length ? framed : items).map((it) => it.src.wi
               decoding="async"
               sizes="(min-width: 640px) 540px, 100vw"
               class="absolute inset-0 h-full w-full object-cover"
+              style={[
+                img.position && `object-position: ${img.position}`,
+                img.zoom && `transform: scale(${img.zoom})`,
+                img.origin && `transform-origin: ${img.origin}`,
+              ].filter(Boolean).join('; ') || undefined}
             />
           </figure>
         ))}
