@@ -25,13 +25,16 @@ export const LINKEDIN = 'https://www.linkedin.com/in/bhavana-joshi-us';
  */
 export const HIDE_GATED = import.meta.env.HIDE_GATED === '1';
 
-type Visibility = { draft: boolean; gated: boolean };
+type Visibility = { draft: boolean; gated: boolean; unlisted: boolean };
 
 /** Does this study get a page at all? */
 export const isBuilt = ({ gated }: Visibility) => !(HIDE_GATED && gated);
 
-/** Does this study appear on the grid, the homepage, and in prev/next? */
-export const isListed = (data: Visibility) => !data.draft && isBuilt(data);
+/** Is this study part of the prev/next chain at the foot of each study? */
+export const inSequence = (data: Visibility) => !data.draft && isBuilt(data);
+
+/** Does this study appear on the homepage grid and the /work index? */
+export const isListed = (data: Visibility) => !data.unlisted && inSequence(data);
 
 export const NAV_LINKS = [
   { href: '/work', label: 'Work' },

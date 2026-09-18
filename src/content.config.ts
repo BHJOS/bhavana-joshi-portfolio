@@ -42,6 +42,13 @@ const work = defineCollection({
        * the /work index, prev/next navigation, and the sitemap, and gets noindex.
        */
       draft: z.boolean().default(false),
+      /**
+       * true = a finished study kept off the homepage grid and the /work index, but
+       * still part of prev/next navigation, slotted in by `order` between its
+       * neighbors. Gets noindex. Used for the Patient Profile Tool, which follows
+       * Future State IVAs (Bhavana, 2026-09-18). Not for work in progress, use `draft`.
+       */
+      unlisted: z.boolean().default(false),
       /** Manual sort on the work index — lower comes first. */
       order: z.number().int(),
     })

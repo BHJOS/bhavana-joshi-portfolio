@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { isBuilt, isListed } from '../../consts';
+import { isBuilt, inSequence } from '../../consts';
 
 export const getStaticPaths = (async () => {
   // With HIDE_GATED set, gated studies get no page at all (see consts.ts).
@@ -11,12 +11,13 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props;
-const { title, client, year, role, summary, tags, hero, gated, draft } = entry.data;
+const { title, client, year, role, summary, tags, hero, gated, draft, unlisted } = entry.data;
 const { Content } = await render(entry);
 
 // Ordered siblings, for prev/next at the foot of the study. Drafts are reachable
-// by direct URL but never linked from published pages.
-const all = (await getCollection('work', ({ data }) => isListed(data))).sort(
+// by direct URL but never linked from published pages. Unlisted studies stay in
+// the chain even though they are off the grid.
+const all = (await getCollection('work', ({ data }) => inSequence(data))).sort(
   (a, b) => a.data.order - b.data.order
 );
 // A draft is not in `all`, so findIndex returns -1 — and all[idx + 1] would then
@@ -30,7 +31,7 @@ const next = idx === -1 ? undefined : all[idx + 1];
   title={title}
   description={summary}
   ogImage={hero.src}
-  noindex={gated || draft}
+  noindex={gated || draft || unlisted}
 >
   <article>
     <header class="container-content pt-16 pb-8 md:pt-24">
