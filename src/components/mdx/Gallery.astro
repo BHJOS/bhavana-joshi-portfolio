@@ -16,9 +16,16 @@ interface Props {
   columns?: 2 | 3 | 4;
   /** One caption for the set as a whole. Composable with per-item captions. */
   caption?: string;
+  /**
+   * 'contain' (default) shows every image whole, centered in the shared frame. Right
+   * for UI screenshots, where cropping loses content. 'cover' fills the frame edge to
+   * edge and crops the overflow. For photographs only (Bhavana, 2026-09-18).
+   */
+  fit?: 'contain' | 'cover';
 }
 
-const { items, columns = 3, caption } = Astro.props;
+const { items, columns = 3, caption, fit = 'contain' } = Astro.props;
+const fitClass = fit === 'cover' ? 'object-cover' : 'object-contain';
 
 // One frame size for the whole set: the tallest image's ratio. Wider images sit
 // centered inside it with their full content intact rather than being cropped.
@@ -60,7 +67,7 @@ const sizesHint = {
               loading="lazy"
               decoding="async"
               sizes={sizesHint}
-              class="h-full w-full object-contain"
+              class={`h-full w-full ${fitClass}`}
             />
           </div>
           {it.caption && (
