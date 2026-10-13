@@ -6,7 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 /**
  * Path fragments excluded from sitemap.xml — these case studies sit behind
- * Cloudflare Access after deploy. Kept in sync with `gated: true` in the work collection.
+ * Cloudflare Access. Kept in sync with `gated: true` in the work collection AND with
+ * the Access application's destinations (a new gated study needs both).
  * TODO(phase 4): derive this from the content collection instead of hand-maintaining it.
  */
 const GATED_PATHS = [
@@ -18,8 +19,8 @@ const GATED_PATHS = [
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO(bhavana): confirm the production domain before the first Cloudflare deploy.
-  // This drives canonical URLs, absolute og:image paths, and sitemap.xml entries.
+  // Production domain, live since 2026-10. Drives canonical URLs, absolute og:image
+  // paths, and sitemap.xml entries.
   site: 'https://www.bhavanajoshi.com',
 
   // Cloudflare serves the `dist/` folder directly (Workers static assets, wrangler.jsonc).

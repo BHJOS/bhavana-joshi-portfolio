@@ -1,7 +1,8 @@
 # Bhavana Joshi — Design to Delivery
 
-Portfolio site for Bhavana Joshi, product designer. Replaces the Squarespace site at
-`www.bhavanajoshi.com`. Static Astro, deployed to Cloudflare (Workers static assets).
+Portfolio site for Bhavana Joshi, product designer. Live at `https://www.bhavanajoshi.com`
+since 2026-10, replacing the Squarespace site. Static Astro, deployed to Cloudflare
+(Workers static assets).
 
 > `CLAUDE.md` is a symlink to this file. Editing either edits both.
 
@@ -42,6 +43,9 @@ Minimal black-and-white editorial.
   including the homepage grid, case-study figures, and the portrait, image frames
   stay square-edged. Images in a row (TwoUp, Gallery, BeforeAfter, work cards) share
   one frame ratio and sit centered inside it with `object-contain`, never cropped.
+  Two sanctioned exceptions, both opt-in per figure (see MDX components): photographs
+  may fill their frame with cover fit, and artwork that already sits on white may drop
+  the hairline frame (`borderless`). UI screenshots always keep the frame and contain fit.
 - Rules/borders are hairline (`1px`) and near-black or a light gray — never mid-gray mush.
 
 ### The work is the color.
@@ -138,13 +142,45 @@ year:    number
 role:    string
 summary: string    // 1–2 sentences. Used on cards AND as the meta description.
 tags:    string[]  // e.g. ["product design", "design systems"]
-hero:    image()
-heroAlt: string
-gated:   boolean   // true = sits behind Cloudflare Access after deploy
-order:   number    // manual sort on the index — lower comes first
+hero:        image()
+heroAlt:     string
+heroAltTodo: boolean  // true = alt text still owed by Bhavana (see Accessibility)
+gated:       boolean  // true = sits behind Cloudflare Access
+draft:       boolean  // true = rewrite under review (see Visibility)
+unlisted:    boolean  // true = finished but kept off the grid (see Visibility)
+order:       number   // manual sort on the index — lower comes first
 ```
 
 `gated: true` pages are **excluded from sitemap.xml** and get `noindex`.
+
+### Visibility — `unlisted` vs `draft`
+
+The helpers live in `src/consts.ts`: `isBuilt`, `inSequence` (prev/next chain),
+`isListed` (homepage grid and `/work`).
+
+| Flag | Grid + `/work` | Prev/next chain | Sitemap | Page builds |
+| --- | --- | --- | --- | --- |
+| `unlisted: true` | no | **yes**, slotted by `order` | no (`noindex`) | yes |
+| `draft: true` | no | no | no (`noindex`) | **yes** |
+
+- `unlisted` is for finished work kept off the grid. The Interactive Patient Profile
+  Tool (order 4) is unlisted. It sits in the chain between Future State IVAs and the
+  Arts Center and is linked from the end of the IVAs study. Do not promote it to the grid.
+- `draft` is for a rewrite under review. **A draft still builds and is reachable by URL
+  once pushed**, so review drafts on the local server, never on the live site.
+- `HIDE_GATED=1 npm run build` drops every gated study from the build entirely. Off in
+  production. A pre-launch safety switch kept for emergencies.
+
+### Gated studies — Cloudflare Access
+
+One Zero Trust self-hosted application ("Bhavana Joshi Portfolio") protects the gated
+paths on `www.bhavanajoshi.com`. Login is One-time PIN. To grant a viewer access, add
+their email to the application's Allow policy (Bhavana does this).
+
+**A new gated study needs its path in two places:** `GATED_PATHS` in
+`astro.config.mjs` (keeps it out of the sitemap) and the Access application's
+destinations (actually gates it). Access protects the pages, not the hashed image files
+under `/_astro/`.
 
 ### Case-study body structure
 
@@ -172,6 +208,7 @@ image-dense, and these are how the images get to breathe.
 
 | Component     | Purpose                                        |
 | ------------- | ---------------------------------------------- |
+| `Figure`      | Single captioned image; the shared primitive   |
 | `FullBleed`   | Edge-to-edge image, escapes the content column |
 | `TwoUp`       | Two images side by side, stacking on mobile    |
 | `BeforeAfter` | Labeled before/after comparison pair          |
@@ -180,7 +217,25 @@ image-dense, and these are how the images get to breathe.
 | `Stats`       | Results/outcome row of figures                 |
 
 All of them take Astro `image()` references and render through `<Image>`. All of them
-require `alt`. None of them ship client JS.
+require `alt` or `altTodo`. None of them ship client JS.
+
+Opt-in options (all documented inline in the component files; the Arts Center study
+uses every one):
+
+- **`borderless`** on `Figure` and `TwoUp` drops the hairline frame. Only for artwork
+  that already sits on white (logo sheets, color and type specimens, diagrams).
+  **Before going borderless, check the image file for baked-in edge lines** (the 2010
+  firehouse screenshot had one) and trim them from the original.
+- **`Gallery fit="cover"`** fills each frame and crops the overflow, with an optional
+  per-item `position` (CSS object-position). Photographs only, never UI screenshots.
+- **`TwoUp` item `below`** stacks a second photo under the first in the same column,
+  cover fit, with optional `zoom`, `position`, and `origin`. Photographs only. Skip
+  per-item captions when using it.
+
+Everything else keeps the hairline frame and `object-contain`.
+
+**View every image before writing its caption or alt text.** Reference docs and asset
+filenames have been wrong about image contents repeatedly.
 
 ---
 
@@ -248,7 +303,14 @@ percent-encoding (`colors%402x.png`), and a few carry a scraped `&quot;,` suffix
 ## Working agreement
 
 - Build in **phases**, stop for review where the brief says stop.
-- **Git commits per phase.** Do not push anywhere — Bhavana connects GitHub and
-  Cloudflare Pages herself.
+- **Commit per approved change.** Run `npm run verify` first and check the built HTML
+  in `dist/`. Author `Bhavana <bhavana.joshi@gmail.com>`.
+- **Push only when Bhavana says push.** `main` lives at
+  `github.com/BHJOS/bhavana-joshi-portfolio`, and Cloudflare builds and deploys every
+  push to `main` within about a minute. **A push is a publish.**
+- Verify the live site with `curl --resolve www.bhavanajoshi.com:443:104.21.39.42`
+  (a Cloudflare edge address) rather than trusting local DNS. Public pages return 200,
+  gated pages return 302 to the Access login.
+- Never touch DNS, Access, or Cloudflare settings without Bhavana.
 - Placeholder content is always **clearly marked** and paired with a TODO listing exactly
   what Bhavana needs to supply. Never let a placeholder read as if it were real.
