@@ -51,9 +51,9 @@ export const NAV_LINKS = [
  */
 export const CLIENTS = [
   { name: 'Xerox', file: 'xerox.png', h: 36 },
-  { name: 'IBM', file: 'ibm.png', h: 36 },
-  { name: 'Bristol Myers Squibb', file: 'bms.png', h: 52 },
-  { name: 'Motorola', file: 'moto.png', h: 76 },
+  { name: 'IBM', file: 'ibm.png', h: 31 },
+  { name: 'Bristol Myers Squibb', file: 'bms.png', h: 30 },
+  { name: 'Motorola', file: 'moto.png', h: 54 },
   { name: 'Computershare', file: 'computershare.png', h: 34 },
-  { name: 'Suzuki', file: 'suzuki.png', h: 60 },
+  { name: 'Suzuki', file: 'suzuki.png', h: 28 },
 ] as const;
