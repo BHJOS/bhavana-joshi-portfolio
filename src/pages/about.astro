@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TAGLINE } from '../consts';
 import portrait from '../assets/about/me.webp';
 ---
 
@@ -11,18 +12,17 @@ import portrait from '../assets/about/me.webp';
   <section class="container-content pt-20 pb-24 md:pt-32">
     <div class="grid grid-cols-1 gap-x-16 gap-y-12 md:grid-cols-5">
       <div class="md:col-span-3">
-        <h1 class="text-h1 md:text-display text-balance">
-          I design and develop products from concept to code.
-        </h1>
+        <h1 class="text-h1 md:text-display text-balance">{SITE_TAGLINE}</h1>
 
         <div class="mt-10 max-w-2xl space-y-6 text-lead text-ink-muted">
           <p>
-            As a senior product designer with twenty years of experience across health,
-            pharmaceutical, and financial platforms, I understand the importance of
-            accessibility, compliance, and clarity under pressure. I regularly prototype in production-grade React and TypeScript
-            using Claude Code, enabling teams to test real product behavior early rather than
-            discussing static screens. I have also created and integrated AI-powered features
-            into shipped products.
+            Innovation is not always about creating new but adding value, identifying
+            challenges and problems, and offering creative solutions.
+          </p>
+          <p>
+            As a product designer, I bring a wealth of cross-functional experience in digital
+            design, advertising, and marketing communication. I believe in finding solutions
+            that are inclusive, provide real value, and enhance user experience.
           </p>
           <p>
             My expertise includes research, interaction design, design systems, and data

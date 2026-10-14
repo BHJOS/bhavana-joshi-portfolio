@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import LogoTicker from '../components/LogoTicker.astro';
-import { SITE_TAGLINE, EMAIL, LINKEDIN, CLIENTS, isListed } from '../consts';
+import { EMAIL, LINKEDIN, CLIENTS, isListed } from '../consts';
 
 const work = (await getCollection('work', ({ data }) => isListed(data))).sort(
   (a, b) => a.data.order - b.data.order
@@ -40,16 +40,20 @@ const personSchema = {
 
   {/* Hero */}
   <section class="container-content pt-20 pb-24 md:pt-32 md:pb-32">
-    <h1 class="text-display md:text-display-lg text-balance">{SITE_TAGLINE}</h1>
+    <h1 class="text-display md:text-display-lg text-balance">
+      I design and develop products from concept to code.
+    </h1>
     <div class="mt-10 max-w-2xl space-y-6 text-lead text-ink-muted">
       <p>
-        Innovation is not always about creating new but adding value, identifying
-        challenges and problems, and offering creative solutions.
+        As a senior product designer with many years of experience across health,
+        pharmaceutical, and financial platforms, I understand the importance of
+        accessibility, compliance, and clarity under pressure.
       </p>
       <p>
-        As a product designer, I bring a wealth of cross-functional experience in digital
-        design, advertising, and marketing communication. I believe in finding solutions
-        that are inclusive, provide real value, and enhance user experience.
+        I regularly prototype in production-grade React and TypeScript using Claude Code,
+        enabling teams to test real product behavior early rather than discussing static
+        screens. I have also created and integrated AI-powered features into shipped
+        products.
       </p>
     </div>
   </section>
