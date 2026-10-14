@@ -11,6 +11,10 @@ import type { ImageMetadata } from 'astro';
  *
  * Motion: pauses on hover; the global prefers-reduced-motion rule freezes the
  * animation entirely, leaving a static row.
+ *
+ * Color: the logo files themselves are one dark gray ink (#333) on transparent, so
+ * no filter or opacity is applied. A CSS grayscale over mixed source colors had left
+ * each logo a different gray (Bhavana, 2026-10-14).
  */
 interface Logo {
   name: string;
@@ -50,7 +54,7 @@ const { logos } = Astro.props;
                 loading="lazy"
                 decoding="async"
                 sizes="250px"
-                class="w-auto object-contain opacity-80 grayscale"
+                class="w-auto object-contain"
                 style={`height:${h}px`}
               />
             </li>
