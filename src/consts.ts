@@ -3,7 +3,7 @@
 export const SITE_NAME = 'Bhavana Joshi — Design to Delivery';
 export const SITE_TAGLINE = 'Creativity with purpose.';
 export const SITE_DESCRIPTION =
-  'Bhavana Joshi is a product designer working across digital design, advertising, and marketing communication. Creativity with purpose.';
+  'Bhavana Joshi is a senior product designer who takes products from concept to code, with many years across health, pharmaceutical, and financial platforms.';
 
 /**
  * The old Squarespace site rendered the address as "bhavana.joshiatgmail.com" to dodge
