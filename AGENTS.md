@@ -37,11 +37,11 @@ Minimal black-and-white editorial.
   from the Squarespace site's footer (its lightAccent, hsl(60 7.46% 86.86%)). Nothing
   else gets a tint.
 - **No** gradients. **No** drop shadows. **No** rounded-corner cards or panels.
-  **No** decorative color. The one exception is the Work index (`/work`), where the
-  card thumbnails carry a 16px radius (`rounded-2xl`, the `rounded` prop on
-  `WorkCard`) with the hairline border (Bhavana, 2026-09-15). Everywhere else,
-  including the homepage grid, case-study figures, and the portrait, image frames
-  stay square-edged. Images in a row (TwoUp, Gallery, BeforeAfter, work cards) share
+  **No** decorative color. The one exception is work cards, on the Work index (`/work`)
+  and the homepage grid alike, where the thumbnails carry a 16px radius
+  (`rounded-2xl`, the `rounded` prop on `WorkCard`) with the hairline border
+  (Bhavana, 2026-09-15 for /work, 2026-10-14 for the homepage). Everywhere else,
+  including case-study figures and the portrait, image frames stay square-edged. Images in a row (TwoUp, Gallery, BeforeAfter, work cards) share
   one frame ratio and sit centered inside it with `object-contain`, never cropped.
   Two sanctioned exceptions, both opt-in per figure (see MDX components): photographs
   may fill their frame with cover fit, and artwork that already sits on white may drop
